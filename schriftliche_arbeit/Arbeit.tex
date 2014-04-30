@@ -1,0 +1,42 @@
+\documentclass[a4paper, parskip=half, DIV15]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage[ngerman]{babel}
+%-------------- Kopf- und Fusszeile
+\newcommand{\authorinfo}{Andreas Linggi, Stefan Steiner}
+% äusserer Kopf
+		\newcommand{\oheaderinfo}{Mathematisches Seminar}
+% innerer Kopf
+		\newcommand{\iheaderinfo}{}
+% zentrierter Kopf
+		\newcommand{\cheaderinfo}{}
+%------- Rand falls eingeschaltet
+%\newcommand{\randabstand}{1.5cm}
+%--------------------------------------------- Schriften
+%------- Schriften Kopf- und Fusszeile
+\newcommand{\headfootnotefont}{\scriptsize\upshape}
+%------- Schrift von Listenelementen
+\newcommand{\listfont}{\sffamily}
+%--------------------------------------------- Name von Eigener Liste
+\newcommand{\nameoflist}{\oheaderinfo \hspace{1cm}\small{\authorinfo} \hspace{3cm}\today}
+%--------------------------------------------- Masse Tabellen
+\newcommand{\tabellenbreite}{14cm}
+\newcommand{\notizenbreite}{4cm}
+\newcommand{\vollebreite}{17.5cm}
+%---------------------------------------------
+
+
+\include{header}
+
+\newcommand{\dunderline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+
+\tableofcontents
+
+\input{aufgabenstellung}
+\input{algorithmus}
+\input{visualisierung}
+
+
+\end{document}
