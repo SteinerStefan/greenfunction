@@ -20,8 +20,8 @@
 void gaussSeidel(float* f, float* x, int n, int iter, int numthreads) {
 // f and x have the same size n^2    
     int dim = n*n;
-    int i,j,k;
-    float sum;
+    int i,k;
+//    float sum;
     
     for (k = 0; k<iter; k++) 
 	{
@@ -30,8 +30,8 @@ void gaussSeidel(float* f, float* x, int n, int iter, int numthreads) {
         for (i = 0; i < dim; i++)
 		{
             // sum of the i. row without i=j
-            sum = 0;
-            for (j = 0; j<dim; j++) 
+            float sum = 0;
+            for (int j = 0; j<dim; j++) 
 			{  
                 if (i>j) 
 				{
@@ -57,7 +57,7 @@ void gaussSeidel(float* f, float* x, int n, int iter, int numthreads) {
 
                 } // else i=j
             }
-	        x[i] = (f[i]-sum)/-4;
+	        x[i] = (f[i]-sum)/(-4);
         }
 		float** outImage;
 		outImage = newMatrixFromVector(x,n);     // Matrix aus Vector erstellen

@@ -27,14 +27,14 @@ int makeEPSWithCSV(int pictureNumber)
 	snprintf( sourceName, fileNameLength, "../data/step%03d.csv",pictureNumber); //sourceName  -> CSV
 	snprintf( pictureName, fileNameLength, "../data/step%03d.png",pictureNumber	);//pictureName -> png
 	
-	FILE *gp = popen(GNUPLOT,"w"); //gnuplop pipe schr
+	FILE *gp = popen(GNUPLOT,"w"); //gnuplop pipe schreiben
 	if (gp==NULL) 
 	{
 		printf("Error opening pipe to GNU plot\n");
 		return  EXIT_FAILURE;	
 	}
 	fprintf(gp, "unset key\n");	
-	fprintf(gp, "set contour base\n");
+	//fprintf(gp, "set contour base\n");
 	fprintf(gp, "set terminal png enhanced size 1280,1024\n");
 	fprintf(gp, "set output \"%s\"\n", pictureName);
 	fprintf(gp, "set datafile separator \",\"\n");
