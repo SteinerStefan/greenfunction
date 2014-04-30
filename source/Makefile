@@ -3,15 +3,15 @@
 # (c) 2014 Andreas Linggi & Stefan Steiner
 #
 CC = gcc
-CFLAGS = -g  -O2 -std=gnu99 -Wall -I/usr/include/cfitsio 
-LDFLAGS =   -lcfitsio 
+CFLAGS = -g  -O2 -std=gnu99 -Wall -I/usr/include/cfitsio #-fopenmp -I../common
+LDFLAGS =   -lcfitsio #-L../common
 OFILES = main.o  matrix2csv.o visuGreFuc.o GaussSeidel.o image.o gnuplot.o 
 OUTPUT = VisualizeGreensFunction 
 
 all: 	$(OUTPUT)
 
 $(OUTPUT): 	$(OFILES)
-	$(CC) $(CFLAGS) -fopenmp  -o  $(OUTPUT) $(OFILES) $(LDFLAGS) 
+	$(CC) $(CFLAGS) -fopenmp -o  $(OUTPUT) $(OFILES) $(LDFLAGS) 
 
 main.o : main.c
 	$(CC) $(CFLAGS)-c main.c
@@ -26,7 +26,7 @@ visuGreFuc.o : visuGreFuc.c
 	$(CC) $(CFLAGS)-c visuGreFuc.c
 
 GaussSeidel.o : GaussSeidel.c
-	$(CC) $(CFLAGS)-c GaussSeidel.c
+	$(CC) $(CFLAGS)-c -fopenmp GaussSeidel.c
 
 gnuplot.o : ../gnuplot/gnuplot.c
 	$(CC) $(CFLAGS)-c ../gnuplot/gnuplot.c

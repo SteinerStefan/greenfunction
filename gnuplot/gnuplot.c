@@ -23,6 +23,7 @@ int makeEPSWithCSV(int pictureNumber)
 {
 	char pictureName [fileNameLength];  //Name des Bildes
 	char sourceName[fileNameLength];    //Name des CSV Files
+
 	snprintf( sourceName, fileNameLength, "../data/step%03d.csv",pictureNumber); //sourceName  -> CSV
 	snprintf( pictureName, fileNameLength, "../data/step%03d.png",pictureNumber	);//pictureName -> png
 	

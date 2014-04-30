@@ -23,7 +23,8 @@ void gaussSeidel(float* f, float* x, int n, int iter, int numthreads) {
     int i,j,k;
     float sum;
     
-    for (k = 0; k<iter; k++) {
+    for (k = 0; k<iter; k++) 
+	{
 		printf("Iteration %3d of %3d:\n",k+1,iter);
 		#pragma omp parallel for num_threads(numthreads)
         for (i = 0; i < dim; i++)

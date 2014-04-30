@@ -64,8 +64,9 @@ image_t	*readimage(const char *filename)
 			filename, errmsg);
 		goto bad;
 	}
-
-
+	//gaussSeidel needs negative input
+	for(long i = 0;i < (image->width*image->height); i++)
+			image->data[i] = - (image->data[i]);
 	// return the image
 	return image;
 bad:
