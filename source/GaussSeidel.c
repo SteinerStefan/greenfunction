@@ -38,7 +38,7 @@ void gaussSeidel(float* f, float* x, int n, int iter, int numthreads) {
                     if ((i-n==j)) // Einheitsmatrix links von i=j
 					{		
                     	sum += x[j];
-                    }
+                    }  
 					else if((i-1==j)) // der Wert links von j=i
 					{		
                     	if ((i)%n != 0)  sum += x[j]; // aber nicht der n. Wert
