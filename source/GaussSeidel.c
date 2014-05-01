@@ -17,12 +17,11 @@
 //-------------------------------------------------------------------------------------------------------------------------------
 // gaussSeidel
 //-------------------------------------------------------------------------------------------------------------------------------
-void gaussSeidel(float* f, float* x, int n, int iter, int numthreads) {
+void gaussSeidel(float* f, float* x, int n, int iter, int numthreads, char* dataFoldName) {
 // f and x have the same size n^2    
     int dim = n*n;
-    int i,k;
-//    float sum;
-    
+    int i,k;  
+	float** outImage;
     for (k = 0; k<iter; k++) 
 	{
 		printf("Iteration %3d of %3d:\n",k+1,iter);
@@ -59,9 +58,8 @@ void gaussSeidel(float* f, float* x, int n, int iter, int numthreads) {
             }
 	        x[i] = (f[i]-sum)/(-4);
         }
-		float** outImage;
 		outImage = newMatrixFromVector(x,n);     // Matrix aus Vector erstellen
-		writeMatrixAsCSVtoFile(outImage, n, k);  // in csv File scheiben
+		writeMatrixAsCSVtoFile(outImage, n, k, dataFoldName);  // in csv File scheiben
 		freeMatrix(outImage,n);                  		    
     }
 }

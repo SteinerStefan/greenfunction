@@ -8,24 +8,25 @@
 //-------------------------------------------------------------------------------------------------------------------------------
 // Defines
 //-------------------------------------------------------------------------------------------------------------------------------
-#define fileNameLength 30
 #define GNUPLOT "gnuplot -persist"
+#define fileNameLength 100
 //-------------------------------------------------------------------------------------------------------------------------------
 // Includes
 //-------------------------------------------------------------------------------------------------------------------------------
 #include "gnuplot.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <omp.h>
 //-------------------------------------------------------------------------------------------------------------------------------
 // makeEPSWithCSV
 //-------------------------------------------------------------------------------------------------------------------------------
-int makeEPSWithCSV(int pictureNumber) 
+int makeEPSWithCSV(int pictureNumber, char* dataFoldName) 
 {
 	char pictureName [fileNameLength];  //Name des Bildes
 	char sourceName[fileNameLength];    //Name des CSV Files
 
-	snprintf( sourceName, fileNameLength, "../data/step%03d.csv",pictureNumber); //sourceName  -> CSV
-	snprintf( pictureName, fileNameLength, "../data/step%03d.png",pictureNumber	);//pictureName -> png
+	snprintf( sourceName, fileNameLength, "%s/step%04d.csv",dataFoldName,pictureNumber); //sourceName  -> CSV
+	snprintf( pictureName, fileNameLength, "%s/step%04d.png",dataFoldName,pictureNumber	);//pictureName -> png
 	
 	FILE *gp = popen(GNUPLOT,"w"); //gnuplop pipe schreiben
 	if (gp==NULL) 
@@ -50,9 +51,10 @@ int makeEPSWithCSV(int pictureNumber)
 //-------------------------------------------------------------------------------------------------------------------------------
 // makeEPSWithCSV
 //-------------------------------------------------------------------------------------------------------------------------------
-int makeEPSCollection(int startNumber, int stopNummer)
+int makeEPSCollection(int startNumber, int stopNummer, int numthreads, char* dataFoldName)
 {
-	for(int n = startNumber; n <=stopNummer; n++) makeEPSWithCSV(n);
+	#pragma omp parallel for num_threads(numthreads)
+	for(int n = startNumber; n <=stopNummer; n++) makeEPSWithCSV(n, dataFoldName);
 	return 0;		
 }
 //-------------------------------------------------------------------------------------------------------------------------------

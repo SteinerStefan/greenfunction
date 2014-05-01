@@ -8,7 +8,7 @@
 #define GaussSeidel_array2csv_h
 
 //schreibt eine Matrix in ein CSV file
-int writeMatrixAsCSVtoFile(float** A, int n, int step);
+int writeMatrixAsCSVtoFile(float** A, int n, int step,char* dataFoldName);
 
 #endif
 //-------------------------------------------------------------------------------------------------------------------------------
