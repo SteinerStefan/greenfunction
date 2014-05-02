@@ -4,7 +4,7 @@ TEXFILE= Arbeit.tex
 PDFTITLE= Skript
 
 $(PDFTITLE).pdf:	
-	pdflatex —shell-escape $(TEXFILE).tex
+	pdflatex $(TEXFILE)
 
 
 # alle Dateien loeschen, die von latex automatisch erzeugt werden
