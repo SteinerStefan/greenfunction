@@ -1,0 +1,74 @@
+\documentclass[a4paper, parskip=half, DIV15]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage[ngerman]{babel}
+%-------------- Kopf- und Fusszeile
+\newcommand{\authorinfo}{Andreas Linggi, Stefan Steiner}
+% äusserer Kopf
+		\newcommand{\oheaderinfo}{Mathematisches Seminar}
+% innerer Kopf
+		\newcommand{\iheaderinfo}{}
+% zentrierter Kopf
+		\newcommand{\cheaderinfo}{}
+%------- Rand falls eingeschaltet
+%\newcommand{\randabstand}{1.5cm}
+%--------------------------------------------- Schriften
+%------- Schriften Kopf- und Fusszeile
+\newcommand{\headfootnotefont}{\scriptsize\upshape}
+%------- Schrift von Listenelementen
+\newcommand{\listfont}{\sffamily}
+%--------------------------------------------- Name von Eigener Liste
+\newcommand{\nameoflist}{\oheaderinfo \hspace{1cm}\small{\authorinfo} \hspace{3cm}\today}
+%--------------------------------------------- Masse Tabellen
+\newcommand{\tabellenbreite}{14cm}
+\newcommand{\notizenbreite}{4cm}
+\newcommand{\vollebreite}{17.5cm}
+%---------------------------------------------
+
+
+\include{header}
+
+%------------------- C-Code ------------------- %
+\definecolor{colorkeywordstyle}{RGB}{127,0,127}
+\definecolor{colorcommentstyle}{RGB}{0,116,0}
+\definecolor{colorstringstyle}{RGB}{196,26,22}
+\definecolor{colorbackground}{RGB}{240,240,240}
+\definecolor{royalblue}{rgb}{0.15,0.25,0.55}
+\definecolor{black}{rgb}{0,0,0}
+
+\usepackage{listings}
+\lstnewenvironment{code}[1][]
+  {\lstset{
+  	backgroundcolor =		\color{colorbackground},
+    language =				C++,			
+    basicstyle =    		\ttfamily\small,
+    breaklines = 			true,
+    frame = 				none,
+    columns =				flexible,
+    keepspaces = 			true,
+    keywordstyle=			\color{colorkeywordstyle},
+    identifierstyle	=\color{royalblue},
+    showstringspaces =		false,
+    extendedchars =			true,   
+    commentstyle = 			\color{colorcommentstyle},,
+    numbers = 				left,
+    numbersep = 			2pt,
+    numberstyle =			\tiny,
+    rulecolor=\color{black}, 
+    stepnumber =			1,
+    tabsize = 				4,
+  }}{\vspace{0em}}
+%---------------------------------------------
+
+\newcommand{\dunderline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+
+\tableofcontents
+
+\input{aufgabenstellung}
+\input{algorithmus}
+\input{visualisierung}
+
+
+\end{document}
