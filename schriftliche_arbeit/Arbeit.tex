@@ -28,6 +28,38 @@
 
 \include{header}
 
+%------------------- C-Code ------------------- %
+\definecolor{colorkeywordstyle}{RGB}{127,0,127}
+\definecolor{colorcommentstyle}{RGB}{0,116,0}
+\definecolor{colorstringstyle}{RGB}{196,26,22}
+\definecolor{colorbackground}{RGB}{240,240,240}
+\definecolor{royalblue}{rgb}{0.15,0.25,0.55}
+\definecolor{black}{rgb}{0,0,0}
+
+\usepackage{listings}
+\lstnewenvironment{code}[1][]
+  {\lstset{
+  	backgroundcolor =		\color{colorbackground},
+    language =				C++,			
+    basicstyle =    		\ttfamily\small,
+    breaklines = 			true,
+    frame = 				none,
+    columns =				flexible,
+    keepspaces = 			true,
+    keywordstyle=			\color{colorkeywordstyle},
+    identifierstyle	=\color{royalblue},
+    showstringspaces =		false,
+    extendedchars =			true,   
+    commentstyle = 			\color{colorcommentstyle},,
+    numbers = 				left,
+    numbersep = 			2pt,
+    numberstyle =			\tiny,
+    rulecolor=\color{black}, 
+    stepnumber =			1,
+    tabsize = 				4,
+  }}{\vspace{0em}}
+%---------------------------------------------
+
 \newcommand{\dunderline}[1]{\underline{\underline{#1}}}
 
 \begin{document}
