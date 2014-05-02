@@ -8,7 +8,7 @@
 #define Gauss_Seidel_GaussSeidel_h
 
 // f and x have the same size n^2
-void gaussSeidel(float* f, float* x, int n, int iter, int numthreads, char* dataFoldName);
+void gaussSeidel(float* f, float* x, int n, int iter, int numthreads, char* dataFoldName, int greenstep);
 
 #endif
 //-------------------------------------------------------------------------------------------------------------------------------

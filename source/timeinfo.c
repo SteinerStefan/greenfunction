@@ -8,6 +8,10 @@
 //-------------------------------------------------------------------------------------------------------------------------------
 //Includes
 //-------------------------------------------------------------------------------------------------------------------------------
+#define fileNameLength 100
+//-------------------------------------------------------------------------------------------------------------------------------
+//Includes
+//-------------------------------------------------------------------------------------------------------------------------------
 #include <stdio.h>
 #include "stdlib.h"
 #include "timeinfo.h"
@@ -35,4 +39,34 @@ int getSeconds(int seconds)
 	return seconds -= (seconds/60)*60;
 }
 //-------------------------------------------------------------------------------------------------------------------------------
+//writeTime2File
+//-------------------------------------------------------------------------------------------------------------------------------
+int writeTime2File(int timerArrC, int *timerArrV, char *dataFolderName)
+{
+	char path[fileNameLength];
+	FILE *timedatei;	
+	snprintf(path, fileNameLength, "%s/timing.txt", dataFolderName);	
+	timedatei = fopen(path, "w"); //writing	
+    if (timedatei == NULL)
+    {
+        printf("Fehler beim oeffnen der Datei.");
+        return EXIT_FAILURE;
+    }
+ 	fprintf(timedatei, "Programmlaufzeit: %d:%d:%d\n",getHours(timerArrV[0]),getMinutes(timerArrV[0]), getSeconds(timerArrV[0]) );
+	fclose(timedatei);
+	return 0;
+}
+//-------------------------------------------------------------------------------------------------------------------------------
+//plotTime
+//-------------------------------------------------------------------------------------------------------------------------------
+int plotTime(int *timerArrV, int wert)
+{
+	printf("Programmlaufzeit: %d:%d:%d\n",getHours(timerArrV[wert]),getMinutes(timerArrV[wert]), getSeconds(timerArrV[wert]) );
+	return 0;
+}
+//-------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
 
