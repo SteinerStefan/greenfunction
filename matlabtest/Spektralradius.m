@@ -25,7 +25,7 @@ A = [T E Z Z Z;
 M = tril(A);
 N = A-M;
 C = pinv(M)*N;
-Spektralradius1 = max(eig(C));
+Spektralradius1 = max(abs(eig(C)));
 
 
 fprintf('Spektralradius von A(5^2 x 5^2): %4.5f\n',Spektralradius1);
@@ -56,6 +56,6 @@ A2 =[T E Z Z Z Z Z Z Z Z;
 M2 = tril(A2);
 N2 = A2-M2;
 C2 = pinv(M2)*N2;
-Spektralradius2 = max(eig(C2));
+Spektralradius2 = max(abs(eig(C2)));
 
 fprintf('Spektralradius von A(10^2 x 10^2): %4.5f\n',Spektralradius2);
