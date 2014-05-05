@@ -38,6 +38,7 @@ void gaussSeidel(float* f, float* x, int n, int iter, int numthreads, char* data
 	outImage = newMatrixFromVector(x,n);     // Matrix aus Vector erstellen
 	writeMatrixAsCSVtoFile(outImage, n, 0, dataFoldName);  // in csv File scheiben
 	freeMatrix(outImage,n);                  		    
+	
 
 	for(int step = 1; step <= iter; step++)	
 	{
@@ -60,19 +61,21 @@ void gaussSeidel(float* f, float* x, int n, int iter, int numthreads, char* data
 		x[n2-1] = (f[n2-1]  - x[n2-2] - x[n2-n-1])/-tf; //rechts unten
 
 		//Rand
+		#pragma omp parallel for num_threads(numthreads)
 		for(int l = 1; l<(n-1); l++)//oben
 			x[l] = (f[l] - x[l+1] - x[l-1] -x[l+n])/-tf;
-
+		#pragma omp parallel for num_threads(numthreads)
 		for(int l = n2-n+1; l<n2-1; l++)//unten
 			x[l] = (f[l] - x[l+1] - x[l-1] - x[l-n])/-tf;
-
+		#pragma omp parallel for num_threads(numthreads)
 		for(int l = n; l<=(n2-2*n); l+=n)//links
 			x[l] = (f[l] - x[l+1] - x[l-n] - x[l+n])/-tf;
-	
+		#pragma omp parallel for num_threads(numthreads)	
 		for(int l = (2*n-1); l<= (n2-n-1); l+=n)//rechts
 			x[l] = (f[l]  - x[l-1] - x[l-n] - x[l+n])/-tf;
 
 		//Rest
+		#pragma omp parallel for num_threads(numthreads)
 		for(int u = n+1; u <(n2-n-2); u+=n)
 		{
 			for(int l = u;l < u+n-2; l++) 

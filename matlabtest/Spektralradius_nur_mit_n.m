@@ -4,6 +4,7 @@
 % Datum: 05.05.2014
 % Andreas Linggi
 
+n = 30;
 n2 = n^2
 A = zeros(n2);
 for i=1:n2
