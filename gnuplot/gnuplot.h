@@ -12,7 +12,7 @@
 int makeEPSWithCSV(int pictureNumber, char* dataFoldName, float zMin, float zMax); 
 //generiert eine Folge von Bildern aus CSV files
 //startNumber ist die Nummer des ersten Bildes und stopNummer die letzte
-int makeEPSCollection(int startNumber, int stopNummer , int numthreads, char* dataFoldName);
+int makeEPSCollection(int n, int startNumber, int stopNummer , int numthreads, char* dataFoldName);
 #endif
 //-------------------------------------------------------------------------------------------------------------------------------
 
