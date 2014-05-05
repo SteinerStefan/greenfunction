@@ -65,6 +65,8 @@ int main(int argc, const char * argv[])
 	snprintf(dataFolderName, fileNameLength, "../data_%s_%d", helpString	, iterations);
 	printf("dataFolderName: %s\n", dataFolderName);
 	mkdir(dataFolderName);                    //Ordner erstellen
+	
+	
 
 	//Berechnung durchfuehren
 	printf("Starte Berechnung...\n");
@@ -81,7 +83,21 @@ int main(int argc, const char * argv[])
 //				v[(n/2+1+q)*n + (n/2+1+w)] = image->data[(n/2+1+q)*n + (n/2+1+w)];
 		v = image->data; //BildVektor
 		for (int i=0; i<n2; i++) x[i] = 0;                //mit null initialisieren
+		
+		//to debug
+		for (int i=0; i<n2; i++) v[i] = 0;                //mit null initialisieren
+		v[4*n+4] = -5; 		v[4*n+5] = -5; 		v[4*n+6] = -5; 
+		v[5*n+4] = -5; 		v[5*n+5] = -0; 		v[5*n+6] = -5; 
+		v[6*n+4] = -5; 		v[6*n+5] = -5; 		v[6*n+6] = -5; 
+
+		
 		gaussSeidel(v,x,n,iterations,numthreads, dataFolderName, greenstep); 	// Berechnungen durchführen
+	for (int i=0; i<n2; i++)
+	{
+		printf("%2.3f ",x[i]);                //ausgeben
+		if((i+1)%n == 0) printf("\n"); 
+	}
+		
 	}
 	free(v);
 	free(x);
@@ -90,7 +106,7 @@ int main(int argc, const char * argv[])
 	//Gnuplot erstellen
 	printf("Generiere Plot\n:");	
 //	makeEPSCollection(0,n/2+1, numthreads, dataFolderName); 
-	makeEPSCollection(0,iterations-1, numthreads, dataFolderName); 
+	makeEPSCollection(0,iterations, numthreads, dataFolderName); 
 	free(image);    
 	//printf("Generiere movie\n");
     //system("avconv -i ../data/step%4d.png -b:v 1000k ../data/greenmovie.mp4"); //film aus png erstellen
