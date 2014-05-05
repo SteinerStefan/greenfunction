@@ -85,10 +85,10 @@ int main(int argc, const char * argv[])
 		for (int i=0; i<n2; i++) x[i] = 0;                //mit null initialisieren
 		
 		//to debug
-		for (int i=0; i<n2; i++) v[i] = 0;                //mit null initialisieren
-		v[4*n+4] = -5; 		v[4*n+5] = -5; 		v[4*n+6] = -5; 
-		v[5*n+4] = -5; 		v[5*n+5] = -0; 		v[5*n+6] = -5; 
-		v[6*n+4] = -5; 		v[6*n+5] = -5; 		v[6*n+6] = -5; 
+		//for (int i=0; i<n2; i++) v[i] = 0;                //mit null initialisieren
+		//v[4*n+4] = -5; 		v[4*n+5] = -5; 		v[4*n+6] = -5; 
+		//v[5*n+4] = -5; 		v[5*n+5] = -0; 		v[5*n+6] = -5; 
+		//v[6*n+4] = -5; 		v[6*n+5] = -5; 		v[6*n+6] = -5; 
 
 		
 		gaussSeidel(v,x,n,iterations,numthreads, dataFolderName, greenstep); 	// Berechnungen durchführen
