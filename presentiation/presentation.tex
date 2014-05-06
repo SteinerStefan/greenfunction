@@ -1,84 +1,76 @@
-\documentclass{beamer}
+\documentclass[hyperref={pdfpagelabels=false}]{beamer}
 \usepackage[T1]{fontenc}
 \usepackage[latin1]{inputenc}
 \usepackage[ngerman]{babel}
 
 \usetheme{Dresden}
 \usecolortheme{beaver}
-\setbeamercovered{transparent}
-\beamertemplatenavigationsymbolsempty
+%\setbeamercovered{transparent}
+%\beamertemplatenavigationsymbolsempty
 \setbeamertemplate{footline}[frame number]
 
-\title{Proseminar Grenzen der Berechenbarkeit}
 
-\author[M. Schulz]{
-	Michael Schulz
-}
+\title{Visualisierung von Green's Function}
+\author[A. Linggi, S. Steiner]{ Andreas Linggi, Stefan Steiner}
+
 
 \begin{document}
-
-	\frame{
-		\titlepage
-	}
+	\frame{\titlepage}
 
 	\begin{frame}
-		Inhalt
-	\end{frame}
+	\frametitle{Inhaltsverzeichnis}
+	\tableofcontents
+	\end{frame} 
 	
-	\begin{frame}[fragile]{"Uberschrift}
-		\begin{verbatim}
-			int foo() { return 0; }
-		\end{verbatim}
-	\end{frame}
+\begin{frame}
+\frametitle{Inhaltsverzeichnis}
+\tableofcontents
+\end{frame} 
 
-	\frame[<+->][label=Liste]{
-		\frametitle{"Uberschrift}
-		\begin{itemize}
-		\item uno
-		\item duo
-		\end{itemize}
-	}
 
-	\frame{
-		\frametitle{Inhaltsverzeichnis}
-		\tableofcontents
-		[pausesections]
-	}
-	
-	\begin{columns}
-	        \column{.55\textwidth}
-	                \pgfimage[width=\textwidth]{schaubild}
-	        \column{.45\textwidth}
-	                \begin{enumerate}
-	                \item Start
-	                \item Stopp
-	                \end{enumerate}
-	                
-	        
-	\end{columns}
-	
-	\begin{frame}
-		\begin{block}{Blocktitel}
-		        Blocktext
-		\end{block}
-		
-		\begin{exampleblock}{Beispielblocktitel}
-		        Beispielblocktext
-		\end{exampleblock}
-		
-		\begin{alertblock}{Warnungsblocktitel}
-			                Warnungsblocktext
-		\end{alertblock}
-	\end{frame}
-	
-	\begin{frame}
-		\begin{itemize}
-		        \item Einleitung
-		        \item<2-> daher
-		        \item<alert@3> aber Achtung!
-		        \item<3-> also so und so
-		        \item<4-> Schlussfolgerung
-		\end{itemize}
-	\end{frame}
+\section{Grundlagen} 
+\begin{frame}
+\frametitle{Grundlagen} 
+Die einzelnen Frames sollte einen Titel haben 
+\end{frame}
+
+
+\subsection{Unterkapitel von Grundlagen}
+\begin{frame} 
+Grundlagen bbla bla bla
+\end{frame}
+
+\section{Algorithmus}
+\begin{frame}
+\frametitle{Algorithmus}
+\begin{itemize}
+\item Einf\"uhrungskurs in \LaTeX{}  
+\item Kurs 2  
+\item Seminararbeiten und Pr\"asentationen mit \LaTeX{} 
+\item Die Beamerclass 
+\end{itemize} 
+\end{frame}
+
+\section{FITS-File}
+\begin{frame}
+\frametitle{FITS-File}
+\begin{itemize}
+\item  Einf\"uhrungskurs in \LaTeX{} \pause 
+\item  Kurs 2 \pause 
+\item  Seminararbeiten und Pr\"asentationen mit \LaTeX{} \pause 
+\item  Die Beamerclass
+\end{itemize} 
+\end{frame}
+
+\section{Visualisierung}
+\begin{frame}
+\frametitle{Aufz\"ahlung mit Pausen}
+\begin{itemize}[<+->]
+\item  Einf\"uhrungskurs in \LaTeX{} 
+\item  Kurs 2 
+\item  Seminararbeiten und Pr\"asentationen mit \LaTeX{} 
+\item  Die Beamerclass
+\end{itemize} 
+\end{frame}
 	
 \end{document}
