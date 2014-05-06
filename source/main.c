@@ -42,7 +42,7 @@ int main(int argc, const char * argv[])
 	int n = image->width; //laenge des Bildes
 	int n2 = n*n;         //Flaeche des Bildes
     int iterations = 0;   //anzahl Iterationen
-    int numthreads = 8;   //Threads zum Brauchen
+    int numthreads = 4;   //Threads zum Brauchen
  	long zeitArray[3];    //1. gesamte Programmlaenge, 2. Berechnungslaenge, 3. Bilderstellung
 	char dataFolderName[fileNameLength];  //name des Ordners
     time_t timerBeginn,timerEnde;         //Timer für berechnungslänge

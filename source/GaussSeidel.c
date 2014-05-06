@@ -84,6 +84,7 @@ void gaussSeidel(float* f, float* x, int n, int iter, int numthreads, char* data
 				x[l] = (f[l] - x[l+1] - x[l-1] - x[l-n] -x[l+n])/-tf;
 			}
 		}
+
 		//for(int u = 0; u <n2; u++)x[u] = help[u];
 			
 			printf("\nIteration %3d of %3d: Give out f[%d, %d] = %f \n",step,iter, testx,testy,f[testx*n+testy]); 
