@@ -106,7 +106,7 @@ int main(int argc, const char * argv[])
 	//Gnuplot erstellen
 	printf("Generiere Plot\n:");	
 //	makeEPSCollection(0,n/2+1, numthreads, dataFolderName); 
-	makeEPSCollection(0,iterations, numthreads, dataFolderName); 
+	makeEPSCollection(n,0,iterations, numthreads, dataFolderName); //n = dimension der Matrix 
 	free(image);    
 	//printf("Generiere movie\n");
     //system("avconv -i ../data/step%4d.png -b:v 1000k ../data/greenmovie.mp4"); //film aus png erstellen
