@@ -66,7 +66,7 @@ image_t	*readimage(const char *filename)
 	}
 	//gaussSeidel needs negative input
 	for(long i = 0;i < (image->width*image->height); i++)
-			image->data[i] = - (image->data[i] * 10E-6);
+			image->data[i] = - (image->data[i] * 10E-6); //buchstabengrösse 
 	//return the image
 
 	return image;
