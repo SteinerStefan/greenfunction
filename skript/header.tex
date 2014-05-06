@@ -1,20 +1,7 @@
-%\usepackage[	left	=1.5cm, %
-%				right	=1cm, %
-%				top		=1cm, %
-%				bottom	=1cm, %
-%includeheadfoot]{geometry}
-
 \usepackage[ngerman]{varioref}
 \usepackage[german]{fancyref}
-\usepackage{graphicx,amssymb,amsmath}
-\usepackage{framed}						% Für Graue Beispielboxen
-\usepackage{epstopdf}					% Zum einbinden von .eps Dateien (z.B. Matlab)
-\usepackage{stmaryrd}					% Dreieck-Sternschaltung
-%--------------------------------------------- Dsrstellung der Einheiten
-\usepackage[locale=DE]{siunitx}
-\sisetup{per-mode=symbol}
+\usepackage{graphicx,amssymb,amsmath,relsize}
 %--------------------------------------------- Kopf- und Fusszeile
-
 \usepackage{scrpage2}
 \pagestyle{scrheadings}
 \clearscrheadings
@@ -28,63 +15,12 @@
 \ihead{\headfootnotefont\iheaderinfo}
 \chead{\headfootnotefont\cheaderinfo}
 \setheadsepline{.4pt} 											% Linie unter der Kopfzeile
-
 %--------------------------------------------- TikZ und GNU Plot
 \usepackage{tikz}
-\usetikzlibrary{arrows,shapes,trees,calc,patterns}
-\usepgflibrary{arrows}
-\usepackage{pgfplots}
-\usepackage[europeanresistors,europeaninductors]{circuitikz} % Für Schaltelemente
-
-\pgfdeclarelayer{bg}    % declare background layer
-\pgfsetlayers{bg,main}
-\newcommand*{\rechterWinkelRadius}{.25cm}
-\newcommand*{\rechterWinkel}[2]{% #1 = point, #2 = start angle
-   \draw[shift={(#2:\rechterWinkelRadius)}] (#1) arc[start angle=#2, delta angle=90, radius = \rechterWinkelRadius];
-   \fill[shift={(#2+45:\rechterWinkelRadius/2)}] (#1) circle[radius=1.25\pgflinewidth];
-}
-
-
 %---------------------------------------------
-
-
-
-
-%--------------------------------------------- & Eigene Liste mysec
 \usepackage{hyperref}
-\usepackage{tocloft}
-
-%\newlistof{mytopsec}{sec}{\nameoflist}
-%\newcommand{\mytopsec}[1]{%
-%\refstepcounter{mytopsec}
-%\par\noindent{\textsf{\textbf{\themytopsec.\hspace{0.5em} #1}}}
-%\addcontentsline{sec}{mytopsec}{\protect\numberline{\themytopsec}#1}\par}
-%
-%
-
-\newlistof{mysec}{sec}{\nameoflist}
-\newcommand{\mysec}[1]{%
-\refstepcounter{mysec}
-\par\noindent{\textsf{\textbf{\themysec.\hspace{0.5em} #1}}}
-\addcontentsline{sec}{mysec}{\protect\numberline{\themysec}#1}\par}
-\newlistentry[mysec]{mysubsec}{sec}{1}
-\newcommand{\mysubsec}[1]{%
-\refstepcounter{mysubsec}
-\par\noindent{\textsf{\themysubsec\hspace{0.5em}#1}}
-\addcontentsline{sec}{mysubsec}{\protect\numberline{\themysubsec}#1}}
-\setcounter{secdepth}{2}
-\newlistentry[mysubsec]{mysubsubsec}{sec}{2}
-\newcommand{\mysubsubsec}[1]{%
-\refstepcounter{mysubsubsec}
-\par\noindent{\textsf{\themysubsubsec\hspace{0.5em}#1}}
-\addcontentsline{sec}{mysubsubsec}{\protect\numberline{\themysubsubsec}#1}}
-\setcounter{secdepth}{3}
-
 %--------------------------------------------- Tabellen
-
 \usepackage{array}
-\usepackage{tabularx}
-\usepackage{siunitx}
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{multicol}
@@ -93,79 +29,35 @@
 \newcommand{\blue}[1]{\textcolor{blue}{#1}}
 \newcommand{\orange}[1]{\textcolor{orange}{#1}}
 
-\newcommand{\schaum}[1]{\textcolor{red!50}{\scriptsize Schaum S.#1}}
-\newcommand{\buch}[1]{\textcolor{red!70!white}{\scriptsize Buch Seite #1}}
-\newcommand{\skript}[1]{\textcolor{red!70!white}{\scriptsize Skript Seite #1}}
-\newcommand{\uZ}{\underline{Z}}
+%------------------- C-Code ------------------- %
+\definecolor{colorkeywordstyle}{RGB}{127,0,127}
+\definecolor{colorcommentstyle}{RGB}{0,116,0}
+\definecolor{colorstringstyle}{RGB}{196,26,22}
+\definecolor{colorbackground}{RGB}{240,240,240}
+\definecolor{royalblue}{rgb}{0.15,0.25,0.55}
+\definecolor{black}{rgb}{0,0,0}
 
-%-------------- Eigene Befehle, nur tabularx Umgebung
-\newcolumntype{Y}{>{\small\raggedright\arraybackslash}X}
-\newcolumntype{m}{>{\parbox[1pt][2em][c]{0cm}{}\centering\arraybackslash}X}
-\newcolumntype{n}{>{\parbox[1pt][2.5em][c]{0cm}{}\centering\arraybackslash}X}
-\newcolumntype{M}{>{\parbox[1pt][3em][c]{0cm}{}\centering\arraybackslash}X}
-\newcolumntype{B}{>{\parbox[1pt][4em][c]{0cm}{}\centering\arraybackslash}X}
-
-%--------------------------------------------- Mathe packages
-
-\usepackage{relsize}					% für grosse Summen- und Integralzeichen \mathlarger\int\limits_{min}^{max}
-\usepackage{amsmath}
-\DeclareMathOperator{\arccot}{arccot}
-\DeclareMathOperator{\arsinh}{arsinh}
-\DeclareMathOperator{\arcosh}{arcosh}
-\DeclareMathOperator{\artanh}{artanh}
-\DeclareMathOperator{\arcoth}{arcoth}
-\DeclareMathOperator{\cjs}{cjs}
-\DeclareMathOperator{\IM}{Im}
-\DeclareMathOperator{\RE}{Re}
-\DeclareMathOperator{\Ln}{Ln}
-\DeclareMathOperator{\sgn}{sgn}
-\DeclareMathOperator{\Var}{Var}
-\DeclareMathOperator{\var}{var}
-\DeclareMathOperator{\cov}{cov}
-\DeclareMathOperator{\sinc}{sinc}
-
-%\newcommand{\korrpaar}{\hspace{1em}\circ -\hspace{0.8mm} \bullet\hspace{1em}}
-\unitlength1cm
-% Zeitbereich -- Frequenzbereich
-\newcommand{\korrpaar}
-{
-\begin{picture}(1,0.5)
-\put(0.2,0.1){\circle{0.14}}\put(0.27,0.1){\line(1,0){0.5}}\put(0.77,0.1){\circle*{0.14}}
-\end{picture}
-}
-% Frequenzbereich -- Zeitbereich
-\newcommand{\Korrpaar}
-{
-\begin{picture}(1,0.5)
-\put(0.2,0.1){\circle*{0.14}}\put(0.27,0.1){\line(1,0){0.45}}\put(0.80,0.1){\circle{0.14}}
-\end{picture}
-}
-%--------------------------------------------- Nummerierung von Gleichungen
-
-%Setzt den equation-Zaehler nach jeder Seite zurueck
-\numberwithin{equation}{section}	
-
-%Definiert den Stil:
-\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
-
-%--------------------------------------------- Graue Beispielboxen
-
-\definecolor{MyBoxColor}{rgb}{0.9,0.9,0.9}
-\newenvironment{shadedSmaller}{
-  \def\FrameCommand{\fboxsep=\FrameSep \colorbox{MyBoxColor}}
-  \MakeFramed {\advance\hsize-2\width\FrameRestore}}
-{\endMakeFramed}
-
-\newenvironment{Beispiel}{
-  \def\FrameCommand{\fboxsep=1em \colorbox{MyBoxColor}}
-  \MakeFramed {\advance\hsize-1.1\width\FrameRestore}}
-{\endMakeFramed}
-
-\newcommand{\loesung}{\subsubsection*{Lösung}}
-
-\newenvironment{teilaufgaben}{
-\begin{enumerate}
-\renewcommand{\labelenumi}{\alph{enumi})}
-}{\end{enumerate}}
-
+\usepackage{listings}
+\lstnewenvironment{code}[1][]
+  {\lstset{
+  	backgroundcolor =		\color{colorbackground},
+    language =				C++,			
+    basicstyle =    		\ttfamily\small,
+    breaklines = 			true,
+    frame = 				none,
+    columns =				flexible,
+    keepspaces = 			true,
+    keywordstyle=			\color{colorkeywordstyle},
+    identifierstyle	=\color{royalblue},
+    showstringspaces =		false,
+    extendedchars =			true,   
+    commentstyle = 			\color{colorcommentstyle},,
+    numbers = 				left,
+    numbersep = 			2pt,
+    numberstyle =			\tiny,
+    rulecolor=\color{black}, 
+    stepnumber =			1,
+    tabsize = 				4,
+  }}{\vspace{0em}}
 %---------------------------------------------
+\newcommand{\dunderline}[1]{\underline{\underline{#1}}}
