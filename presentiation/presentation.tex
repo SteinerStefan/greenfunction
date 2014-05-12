@@ -15,6 +15,42 @@
 
 \usepackage{mathptmx}
 %\usepackage[scaled=.90]{helvet}
+\newcommand{\changefont}[3]{
+\fontfamily{#1} \fontseries{#2} \fontshape{#3} \selectfont}
+%\usefonttheme{serif}
+\usefonttheme{professionalfonts}
+\usepackage{tikz}
+%------------------- C-Code ------------------- %
+\definecolor{colorkeywordstyle}{RGB}{127,0,127}
+\definecolor{colorcommentstyle}{RGB}{0,116,0}
+\definecolor{colorstringstyle}{RGB}{196,26,22}
+\definecolor{colorbackground}{RGB}{240,240,240}
+\definecolor{royalblue}{rgb}{0.15,0.25,0.55}
+\definecolor{black}{rgb}{0,0,0}
+
+\usepackage{listings}
+\lstset{
+  	backgroundcolor =		\color{colorbackground},
+    language =				C++,			
+    basicstyle =    		\ttfamily\scriptsize,
+    breaklines = 			true,
+    frame = 				none,
+    columns =				flexible,
+    keepspaces = 			true,
+    keywordstyle=			\color{colorkeywordstyle},
+    identifierstyle	=\color{royalblue},
+    showstringspaces =		false,
+    extendedchars =			true,   
+    commentstyle = 			\color{colorcommentstyle},,
+    numbers = 				left,
+    numbersep = 			2pt,
+    numberstyle =			\tiny,
+    rulecolor=\color{black}, 
+    stepnumber =			1,
+    tabsize = 				4,
+}
+%---------------------------------------------
+
 
 \begin{document}
 
