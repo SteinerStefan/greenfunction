@@ -36,6 +36,7 @@ int main(int argc, const char * argv[])
 //	mode 100 := last step, 
 //		mode 101 := last step, 	alle Bilder ausgeben
 //		mode 102 := last step, 	letztes Bild ausgegben
+//		mode 110 - 199 := last step jedes mode%100-ste Bild
 //  mode 200 := all steps
 //
 //  mode...
@@ -142,11 +143,20 @@ free(x);
 		//---------------------------------------------------------------------------------------------------//
 		if (mode == 101) // mode 101 := last step, alle Bilder ausgeben
 		{
-			makeEPSCollection(n,0,iterations, numthreads, dataFolderName); //n = dimension der Matrix 
+			makeEPSCollection(n,1,iterations, numthreads, dataFolderName); //n = dimension der Matrix 
 		}
 		else if (mode == 102) // mode 102 := last step, letztes Bild ausgegben
 		{
 			makeEPSCollection(n,iterations,iterations, numthreads, dataFolderName); //n = dimension der Matrix 
+		}else 
+		if (110 <= mode  && mode < 200)
+		{
+			int j = mode%100;
+			for(int i = 1;i<=iterations; i+=j)
+			{
+				makeEPSCollection(n,i,i, numthreads, dataFolderName); 
+			}
+			makeEPSCollection(n,iterations,iterations, numthreads, dataFolderName);
 		}
 		free(image);    
 		time(&timerEnde);
