@@ -27,12 +27,19 @@
 //-------------------------------------------------------------------------------------------------------------------------------
 int main(int argc, const char * argv[])
 {
+	if (argc <= 2) 
+	{
+		system("cat usage.txt");
+		return EXIT_FAILURE;
+	}
+
 	//Bild einlesen
 	image_t	*image = NULL;      //beinhaltet daten, sowie infos ueber aufbau des bildes	
 	image = readimage(argv[1]); //
 //--------------------------------------------------------------------
 // Modus einlesen:
 //--------------------------------------------------------------------
+// 	mode 1xxx := zusaetzlich noch ein Video erstellen
 //	mode 100 := last step, 
 //		mode 101 := last step, 	alle Bilder ausgeben
 //		mode 102 := last step, 	letztes Bild ausgegben
@@ -46,7 +53,10 @@ int main(int argc, const char * argv[])
 //
 //--------------------------------------------------------------------
 	int mode = atoi(argv[2]);
-	printf("Modus: %d\n",mode);
+	int video = mode/1000;
+	mode = mode%1000;
+	printf("# --------------------------- #\n");
+	printf("# Modus: %4d, Video: %4d    #\n",mode,video);
 
 //--------------------------------------------------------------------
 // Bild einlesen
@@ -56,8 +66,9 @@ int main(int argc, const char * argv[])
 		fprintf(stderr, "cannot read image\n");
 		return  EXIT_FAILURE;
 	}
-	else printf("Bild gefunden und geoeffnet\n");
-	printf("width: %d, height: %d\n",image->width, image->height);
+	else printf("# Bild gefunden und geoeffnet #\n");
+	printf("# width: %4d, height: %4d   #\n",image->width, image->height);
+	printf("# --------------------------- #\n");
 //--------------------------------------------------------------------
 //Variablen
 //--------------------------------------------------------------------
@@ -65,11 +76,11 @@ int main(int argc, const char * argv[])
 	int n2 = n*n;         		//Flaeche des Bildes
     int iterations = 0;   		//anzahl Iterationen
     int numthreads = 4;   		//Threads zum Brauchen
- 	long zeitArray[3];    		//1. gesamte Programmlaenge, 2. Berechnungslaenge, 3. Bilderstellung
+	time_t startTime;
+	time(&startTime);		//timer starten
+	printf("startTime: %i\n",startTime);
 	char dataFolderName[fileNameLength];  //name des Ordners
-//---- Zeitmessung
-    time_t timerBeginn,timerEnde;         //Timer für berechnungslaenge
-    time(&timerBeginn);                   //Programm fängt an
+
 //--------------------------------------------------------------------
 //Iterationsschritte und Anzahl der verwendeten Threads angeben
 //--------------------------------------------------------------------
@@ -93,6 +104,7 @@ int main(int argc, const char * argv[])
 //--------------------------------------------------------------------	
 //Berechnung durchfuehren
 //--------------------------------------------------------------------
+writeTime2File(startTime,"vor Berechnung", dataFolderName); 
 	printf("Starte Berechnung...\n");
 	float* x = (float *) malloc(sizeof(float) * n2);  //x lösungsvektor für diesen Schritt
 	float* v ; // =(float *) malloc(sizeof(float) * n2);  //x lösungsvektor für diesen Schritt
@@ -112,8 +124,8 @@ int main(int argc, const char * argv[])
 		{
 			printf("Step %3d of %3d:     \n", greenstep+1, n/2+1);
 			for(int i = 0; i<n2; i++) v[i] = 0;  				//Berechnung welche Pixeldaten verrechnet werden
-			for(int q = -greenstep; q<=greenstep;q++)     
-				for(int w = -greenstep; w<=greenstep;w++) 
+			for(int q = -greenstep; q<greenstep;q++)     
+				for(int w = -greenstep; w<greenstep;w++) 
 				{
 
 					v[(n/2+1+q)*(n) + (n/2+1+w)] = image->data[(n/2+1+q)*(n) + (n/2+1+w)];	
@@ -126,7 +138,7 @@ int main(int argc, const char * argv[])
 			gaussSeidel(v,x,n,iterations,numthreads, dataFolderName, greenstep+1,mode); 	// Berechnungen durchführen
 		}
 	} 
-
+writeTime2File(startTime,"nach Berechnung", dataFolderName); 	
 free(v);
 free(x);
 //--------------------------------------------------------------------
@@ -140,7 +152,7 @@ free(x);
 //--------------------------------------------------------------------
 	if ((100 <= mode  && mode < 200) || (300 <= mode  && mode < 400))
 	{
-		printf("\nGeneriere Plot\n:");
+		printf("\nGeneriere Plot:\n");
 		//---------------------------------------------------------------------------------------------------//
 		// int makeEPSCollection(int n, int startNumber, int stopNummer, int numthreads, char* dataFoldName) //
 		//---------------------------------------------------------------------------------------------------//
@@ -162,42 +174,41 @@ free(x);
 			}
 			makeEPSCollection(n,iterations,iterations, numthreads, dataFolderName,mode);
 		}
-		free(image);    
-		time(&timerEnde);
-		zeitArray[0] = difftime(timerEnde,timerBeginn);		
-		plotTime(zeitArray, 0); //Programmzeit ausgeben
-		writeTime2File(1, zeitArray, dataFolderName); 	
-
+		free(image);    	
 	} else
 	if (200 <= mode  && mode < 300)
 	{
 		printf("\nGeneriere Plot\n:");
+
 		//---------------------------------------------------------------------------------------------------//
 		// int makeEPSCollection(int n, int startNumber, int stopNummer, int numthreads, char* dataFoldName) //
 		//---------------------------------------------------------------------------------------------------//
 		makeEPSCollection(n,1,n/2+1, numthreads, dataFolderName, mode); //n = dimension der Matrix 
+
 		free(image);    
-		time(&timerEnde);
-		zeitArray[0] = difftime(timerEnde,timerBeginn);		
-		plotTime(zeitArray, 0); //Programmzeit ausgeben
-		writeTime2File(1, zeitArray, dataFolderName); 
+		writeTime2File(startTime,"nach gnuplot", dataFolderName); 	
 	}
-
 //--------------------------------------------------------------------
-/*
-	printf("Generiere Plot\n:");	
-//	makeEPSCollection(0,n/2+1, numthreads, dataFolderName); 
-	makeEPSCollection(n,0,iterations, numthreads, dataFolderName); //n = dimension der Matrix 
-	free(image);    
-	//printf("Generiere movie\n");
-    //system("avconv -i ../data/step%4d.png -b:v 1000k ../data/greenmovie.mp4"); //film aus png erstellen
+//Video erstellen
+//--------------------------------------------------------------------
+	if (video != 0)
+	{
+	printf("Generiere movie\n");
+	writeTime2File(startTime,"Generiere movie", dataFolderName); 	
+	char moviePath[fileNameLength];  //name des Ordners
 
-	//Berechnung und Ausgabe der Zeit
-    time(&timerEnde);
-	zeitArray[0] = difftime(timerEnde,timerBeginn);		
-    plotTime(zeitArray, 0); //Programmzeit ausgeben
-    writeTime2File(1, zeitArray, dataFolderName); 	
-	*/
+  	char str1[200];
+  	char str2[40];
+	char str3[100];
+	snprintf(str1, 100,"avconv -i  %s/",dataFolderName);
+  	strcpy (str2,"step%4d.png");
+  	strncat (str1, str2, 40);
+	snprintf(str3, 100," -vb 8000k  -threads %d %s/%dsteps.mp4",numthreads,dataFolderName,n/2+1);
+	strncat (str1, str3, 100);
+	system(str1); //film aus png erstellen	
+	writeTime2File(startTime, "Programmlaufzeit", dataFolderName); 	
+	}
+//	system("cat timing.txt");
 	return EXIT_SUCCESS;
 }
 //-------------------------------------------------------------------------------------------------------------------------------

@@ -24,11 +24,12 @@ void gaussSeidel(float* f, float* x, int n, int iter, int numthreads, char* data
 	//Variablen
 	float** outImage;
 	int n2 = n*n; //Flaeche n^2
-
+//printf("#########################\n start: \n mode: %d; iter: %d\n",mode,iter);
 	if (100 <= mode  && mode < 400) // all modes
 	{	
 		for(int iterations = 1; iterations <= iter; iterations++)	
 		{
+
 			#pragma omp parallel for num_threads(numthreads)
 			for(int u = 0; u < n2; u++)
 			{	
@@ -50,6 +51,8 @@ void gaussSeidel(float* f, float* x, int n, int iter, int numthreads, char* data
 			//printf("%4.0f %4.0f %4.0f\n",x[testy*n + (testx-1)], x[testy*n + testx], x[(testy)*n + testx]);
 			//printf("     %4.0f\n", x[(testy+1)*n + testx]);
 			printf("Iteration %3d of %3d\r",iterations,iter); 
+//printf("\n mode: %d; Iteration: %d\n\n\n\n",mode,iterations);return;
+
 			if(mode < 200 || mode >= 300) 
 			{
 				//printf("write to csv\r\r");
@@ -60,7 +63,7 @@ void gaussSeidel(float* f, float* x, int n, int iter, int numthreads, char* data
 		}   
 	}
 
-	if(mode >= 200 && mode < 300) 
+	if(mode <= 200 && mode < 300) 
 	{
 		printf("write to csv\r\r");
 		outImage = newMatrixFromVector(x,n);     // Matrix aus Vector erstellen

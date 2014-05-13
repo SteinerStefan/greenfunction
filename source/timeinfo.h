@@ -17,7 +17,8 @@ int getHours(int seconds);
 int getSeconds(int seconds);
 
 //schreibt timerdaten in file
-int writeTime2File(int timerArrC, int *timerArrV, char *dataFolderName); 
+//int writeTime2File(int timerArrC, int *timerArrV, char *dataFolderName); 
+int writeTime2File(time_t startTime,char* info, char *dataFolderName);
 
 //schreibt Zeitinformation auf Bildschirm
 int plotTime( int *timerArrV, int wert);

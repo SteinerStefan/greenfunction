@@ -3,7 +3,7 @@
 # (c) 2014 Andreas Linggi & Stefan Steiner
 #
 CC = gcc
-CFLAGS = -g  -O2 -std=gnu99 -Wall -I/usr/include/cfitsio
+CFLAGS = -g  -O2 -std=gnu99 -I/usr/include/cfitsio # -Wall
 LDFLAGS =   -lcfitsio 
 OFILES = main.o  matrix2csv.o visuGreFuc.o GaussSeidel.o image.o gnuplot.o timeinfo.o
 OUTPUT = VisualizeGreensFunction 

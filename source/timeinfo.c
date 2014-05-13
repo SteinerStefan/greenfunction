@@ -41,18 +41,23 @@ int getSeconds(int seconds)
 //-------------------------------------------------------------------------------------------------------------------------------
 //writeTime2File
 //-------------------------------------------------------------------------------------------------------------------------------
-int writeTime2File(int timerArrC, int *timerArrV, char *dataFolderName)
+//int writeTime2File(int timerArrC, int *timerArrV, char *dataFolderName)
+int writeTime2File(time_t startTime,char* info, char *dataFolderName)
 {
+	time_t currentTime;
+	time(&currentTime);
+	double seconds = currentTime-startTime;
+
 	char path[fileNameLength];
 	FILE *timedatei;	
 	snprintf(path, fileNameLength, "%s/timing.txt", dataFolderName);	
-	timedatei = fopen(path, "w"); //writing	
+	timedatei = fopen(path, "a"); //writing	
     if (timedatei == NULL)
     {
         printf("Fehler beim oeffnen der Datei.");
         return EXIT_FAILURE;
     }
- 	fprintf(timedatei, "Programmlaufzeit: %d:%d:%d\n",getHours(timerArrV[0]),getMinutes(timerArrV[0]), getSeconds(timerArrV[0]) );
+ 	fprintf(timedatei, "%s: %02d:%02d:%02d\n",info,getHours(seconds),getMinutes(seconds), getSeconds(seconds));
 	fclose(timedatei);
 	return 0;
 }
@@ -61,7 +66,7 @@ int writeTime2File(int timerArrC, int *timerArrV, char *dataFolderName)
 //-------------------------------------------------------------------------------------------------------------------------------
 int plotTime(int *timerArrV, int wert)
 {
-	printf("Programmlaufzeit: %d:%d:%d\n",getHours(timerArrV[wert]),getMinutes(timerArrV[wert]), getSeconds(timerArrV[wert]) );
+	printf("Programmlaufzeit: %02d:%02d:%02d\n",getHours(timerArrV[wert]),getMinutes(timerArrV[wert]), getSeconds(timerArrV[wert]) );
 	return 0;
 }
 //-------------------------------------------------------------------------------------------------------------------------------
