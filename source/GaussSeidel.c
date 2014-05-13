@@ -21,7 +21,6 @@
 //-------------------------------------------------------------------------------------------------------------------------------
 void gaussSeidel(float* f, float* x, int n, int iter, int numthreads, char* dataFoldName, int greenstep, int mode) 
 {//		x[l] = (f[l] - x[l+1] - x[l-1] - x[l-n] -x[l+n])/4;
-	
 	//Variablen
 	float** outImage;
 	int n2 = n*n; //Flaeche n^2
@@ -45,14 +44,13 @@ void gaussSeidel(float* f, float* x, int n, int iter, int numthreads, char* data
 				   else                                             x[n2-1] = (f[n2-1]   - x[n2-2]- x[n2-n-1])      /-tf;// rechts unten
 				}
 				else x[u] = (f[u] - x[u+1] - x[u-1] - x[u-n] -x[u+n])/-tf;//punkt ist nicht am rand!!
-			}			
-
-			//printf("\nIteration %3d of %3d: Give out f[%d, %d] = %f ",step,iter, testx,testy,f[testx*n+testy]); 
+			}		
+			//printf("\nIteration %3d of %3d: Give out f[%d, %d] = %f ",iterations,iter, testx,testy,f[testx*n+testy]); 
 			//printf("     %4.0f\n", x[(testy-1)*n + testx]);
 			//printf("%4.0f %4.0f %4.0f\n",x[testy*n + (testx-1)], x[testy*n + testx], x[(testy)*n + testx]);
 			//printf("     %4.0f\n", x[(testy+1)*n + testx]);
 			printf("Iteration %3d of %3d\r",iterations,iter); 
-			if(mode < 200 && mode >= 300) 
+			if(mode < 200 || mode >= 300) 
 			{
 				//printf("write to csv\r\r");
 				outImage = newMatrixFromVector(x,n);     // Matrix aus Vector erstellen
@@ -61,9 +59,10 @@ void gaussSeidel(float* f, float* x, int n, int iter, int numthreads, char* data
 			}
 		}   
 	}
+
 	if(mode >= 200 && mode < 300) 
 	{
-		//printf("write to csv\r\r");
+		printf("write to csv\r\r");
 		outImage = newMatrixFromVector(x,n);     // Matrix aus Vector erstellen
 		writeMatrixAsCSVtoFile(outImage, n, greenstep, dataFoldName);  // in csv File scheiben
 		freeMatrix(outImage,n);                  		    

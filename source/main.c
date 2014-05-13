@@ -112,20 +112,21 @@ int main(int argc, const char * argv[])
 		{
 			printf("Step %3d of %3d:     \n", greenstep+1, n/2+1);
 			for(int i = 0; i<n2; i++) v[i] = 0;  				//Berechnung welche Pixeldaten verrechnet werden
-
 			for(int q = -greenstep; q<=greenstep;q++)     
 				for(int w = -greenstep; w<=greenstep;w++) 
 				{
+
 					v[(n/2+1+q)*(n) + (n/2+1+w)] = image->data[(n/2+1+q)*(n) + (n/2+1+w)];	
 				}
-			
 			for (int i=0; i<n2; i++) 
 			{
 				x[i] = 0;                						// mit null initialisieren	
 			}
+
 			gaussSeidel(v,x,n,iterations,numthreads, dataFolderName, greenstep+1,mode); 	// Berechnungen durchführen
 		}
 	} 
+
 free(v);
 free(x);
 //--------------------------------------------------------------------
