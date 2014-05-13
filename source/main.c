@@ -39,6 +39,8 @@ int main(int argc, const char * argv[])
 //		mode 110 - 199 := last step jedes mode%100-ste Bild
 //  mode 200 := all steps
 //
+//  mode 300 := Contour
+//		mode 310 - 399 := last step jedes mode%100-ste Bild; Contour
 //  mode...
 //
 //
@@ -96,7 +98,7 @@ int main(int argc, const char * argv[])
 	float* v ; // =(float *) malloc(sizeof(float) * n2);  //x lösungsvektor für diesen Schritt
 	int greenstep = 0;
 
-	if (100 <= mode  && mode < 200) // mode 100 := last step, 
+	if ((100 <= mode  && mode < 200) || (300 <= mode  && mode < 400)) // mode 100 := last step, 
 	{
 		printf("Mode %d: last step\n", mode);
 		v = image->data; //BildVektor
@@ -135,7 +137,7 @@ free(x);
 //--------------------------------------------------------------------
 //Gnuplot erstellen
 //--------------------------------------------------------------------
-	if (100 <= mode  && mode < 200)
+	if ((100 <= mode  && mode < 200) || (300 <= mode  && mode < 400))
 	{
 		printf("\nGeneriere Plot\n:");
 		//---------------------------------------------------------------------------------------------------//
@@ -143,26 +145,28 @@ free(x);
 		//---------------------------------------------------------------------------------------------------//
 		if (mode == 101) // mode 101 := last step, alle Bilder ausgeben
 		{
-			makeEPSCollection(n,1,iterations, numthreads, dataFolderName); //n = dimension der Matrix 
+			makeEPSCollection(n,1,iterations, numthreads, dataFolderName, mode); //n = dimension der Matrix 
 		}
 		else if (mode == 102) // mode 102 := last step, letztes Bild ausgegben
 		{
-			makeEPSCollection(n,iterations,iterations, numthreads, dataFolderName); //n = dimension der Matrix 
+			makeEPSCollection(n,iterations,iterations, numthreads, dataFolderName, mode); //n = dimension der Matrix 
 		}else 
-		if (110 <= mode  && mode < 200)
+		if ((110 <= mode  && mode < 200) || (310 <= mode  && mode < 400))
 		{
+
 			int j = mode%100;
 			for(int i = 1;i<=iterations; i+=j)
 			{
-				makeEPSCollection(n,i,i, numthreads, dataFolderName); 
+				makeEPSCollection(n,i,i, numthreads, dataFolderName,mode); 
 			}
-			makeEPSCollection(n,iterations,iterations, numthreads, dataFolderName);
+			makeEPSCollection(n,iterations,iterations, numthreads, dataFolderName,mode);
 		}
 		free(image);    
 		time(&timerEnde);
 		zeitArray[0] = difftime(timerEnde,timerBeginn);		
 		plotTime(zeitArray, 0); //Programmzeit ausgeben
 		writeTime2File(1, zeitArray, dataFolderName); 	
+
 	} else
 	if (200 <= mode  && mode < 300)
 	{
@@ -170,13 +174,14 @@ free(x);
 		//---------------------------------------------------------------------------------------------------//
 		// int makeEPSCollection(int n, int startNumber, int stopNummer, int numthreads, char* dataFoldName) //
 		//---------------------------------------------------------------------------------------------------//
-		makeEPSCollection(n,1,n/2+1, numthreads, dataFolderName); //n = dimension der Matrix 
+		makeEPSCollection(n,1,n/2+1, numthreads, dataFolderName, mode); //n = dimension der Matrix 
 		free(image);    
 		time(&timerEnde);
 		zeitArray[0] = difftime(timerEnde,timerBeginn);		
 		plotTime(zeitArray, 0); //Programmzeit ausgeben
 		writeTime2File(1, zeitArray, dataFolderName); 
 	}
+
 //--------------------------------------------------------------------
 /*
 	printf("Generiere Plot\n:");	

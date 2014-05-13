@@ -51,6 +51,38 @@ int makeEPSWithCSV(int pictureNumber, char* dataFoldName, float zMin, float zMax
 	return 0;
 }
 //-------------------------------------------------------------------------------------------------------------------------------
+// makeEPSWithCSVContour
+//-------------------------------------------------------------------------------------------------------------------------------
+int makeEPSWithCSVContour(int pictureNumber, char* dataFoldName, float zMin, float zMax) 
+{
+	char pictureName [fileNameLength];  //Name des Bildes
+	char sourceName[fileNameLength];    //Name des CSV Files
+
+	snprintf( sourceName, fileNameLength, "%s/step%04d.csv",dataFoldName,pictureNumber); 	//sourceName  -> CSV
+	snprintf( pictureName, fileNameLength, "%s/step%04d.png",dataFoldName,pictureNumber);	//pictureName -> png
+	
+	FILE *gp = popen(GNUPLOT,"w"); 					//in gnuplop pipe schreiben
+	if (gp==NULL) {
+		printf("Error opening pipe to GNU plot\n");
+		return  EXIT_FAILURE;	
+	}
+	fprintf(gp, "unset key\n");	
+	fprintf(gp, "unset ztics\n");	
+	fprintf(gp, "set contour base\n");						// Höhenlinien
+	fprintf(gp, "set terminal png enhanced size 1280,1024\n");	// Auflösung vom Plot
+	fprintf(gp, "set output \"%s\"\n", pictureName);			// Dateiname 
+	fprintf(gp, "set datafile separator \",\"\n");				// für CSV File
+	fprintf(gp, "set view 0,90\n"); 							// zoom: z-Achse, Drehwinkel
+	fprintf(gp, "set pm3d \n");									// Farbpalette aktivieren
+	fprintf(gp, "set hidden3d\n");								// Gitternetzlinien ausblenden
+	fprintf(gp, "set palette defined (  0 \"blue\", 8 \"white\", 16 \"red\")\n"); 	// Farbpalette
+	fprintf(gp, "set cbrange [%f:%f]\n",zMin,zMax); 					// Skala von der Farbpalette
+	fprintf(gp, "set colorbox vertical user origin 0.9, 0.2 size 0.02, 0.60\n");	// Position der Farbpalette
+	fprintf(gp, "splot \"%s\" matrix  \n",sourceName);			// Plot
+	pclose(gp);
+	return 0;
+}
+//-------------------------------------------------------------------------------------------------------------------------------
 // getfield		 um .csv einzulesen
 //-------------------------------------------------------------------------------------------------------------------------------
 const char* getfield(char* line, int num)
@@ -66,7 +98,7 @@ const char* getfield(char* line, int num)
 //-------------------------------------------------------------------------------------------------------------------------------
 // makeEPSWithCSV
 //-------------------------------------------------------------------------------------------------------------------------------
-int makeEPSCollection(int n, int startNumber, int stopNummer, int numthreads, char* dataFoldName)
+int makeEPSCollection(int n, int startNumber, int stopNummer, int numthreads, char* dataFoldName, int mode)
 {	
 	// min und max für die Skalierung der z-Achse aus .csv file bestimmen
 	float zMin = 0;
@@ -90,8 +122,23 @@ int makeEPSCollection(int n, int startNumber, int stopNummer, int numthreads, ch
     }
 
 	printf("zMin: %f, zMax: %f\n",zMin,zMax);
-	#pragma omp parallel for num_threads(numthreads)
-	for(int n = startNumber; n <=stopNummer; n++) makeEPSWithCSV(n, dataFoldName, zMin, zMax);
+	if (110 <= mode  && mode < 200)
+	{
+		#pragma omp parallel for num_threads(numthreads)
+		for(int n = startNumber; n <=stopNummer; n++) 
+		{
+			makeEPSWithCSV(n, dataFoldName, zMin, zMax);
+		}		
+	} else 
+	if (310 <= mode  && mode < 400)
+	{
+		#pragma omp parallel for num_threads(numthreads)
+		for(int n = startNumber; n <=stopNummer; n++) 
+		{
+			makeEPSWithCSVContour(n, dataFoldName, zMin, zMax);
+		}			
+	}
+
 	return 0;		
 }
 //-------------------------------------------------------------------------------------------------------------------------------

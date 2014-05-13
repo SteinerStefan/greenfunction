@@ -85,7 +85,7 @@ if (200 <= mode  && mode < 300) // mode 200 := all steps
 		writeMatrixAsCSVtoFile(outImage, n, greenstep, dataFoldName);  // in csv File scheiben
 		freeMatrix(outImage,n);     		
 } else
-if (100 <= mode  && mode < 200) // mode 100 := last step
+if ((100 <= mode  && mode < 200) || (310 <= mode  && mode < 400)) // mode 100 := last step
 	for(int step = 1; step <= iter; step++)	
 	{
 		if(step == 1)
