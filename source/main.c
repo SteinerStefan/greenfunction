@@ -78,7 +78,7 @@ int main(int argc, const char * argv[])
 	//printf("Vorgeschlagene Iterationszahl: %d\n", image->width);
 	scanf("%d %d",&iterations,&numthreads);
 	fseek(stdin,0,SEEK_END); //Buffer leeren
-	}while(iterations <= 1);
+	}while(iterations < 1);
 //--------------------------------------------------------------------
 //Ordnerstruktur hertellen
 //--------------------------------------------------------------------
@@ -114,11 +114,11 @@ int main(int argc, const char * argv[])
 			for(int i = 0; i<n2; i++) v[i] = 0;  				//Berechnung welche Pixeldaten verrechnet werden
 
 			for(int q = -greenstep; q<=greenstep;q++)     
-				for(int w= -greenstep; w<=greenstep;w++) 
+				for(int w = -greenstep; w<=greenstep;w++) 
 				{
-					v[(n/2+1+q)*(n-1) + (n/2+1+w)] = image->data[(n/2+1+q)*(n-1) + (n/2+1+w)];	
+					v[(n/2+1+q)*(n) + (n/2+1+w)] = image->data[(n/2+1+q)*(n) + (n/2+1+w)];	
 				}
-
+			
 			for (int i=0; i<n2; i++) 
 			{
 				x[i] = 0;                						// mit null initialisieren	

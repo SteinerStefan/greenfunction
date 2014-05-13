@@ -122,7 +122,7 @@ int makeEPSCollection(int n, int startNumber, int stopNummer, int numthreads, ch
     }
 
 	printf("zMin: %f, zMax: %f\n",zMin,zMax);
-	if (110 <= mode  && mode < 200)
+	if (110 <= mode  && mode < 300)
 	{
 		#pragma omp parallel for num_threads(numthreads)
 		for(int n = startNumber; n <=stopNummer; n++) 
