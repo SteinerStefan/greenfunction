@@ -154,25 +154,21 @@ free(x);
 	{
 		printf("\nGeneriere Plot:\n");
 		//---------------------------------------------------------------------------------------------------//
-		// int makeEPSCollection(int n, int startNumber, int stopNummer, int numthreads, char* dataFoldName) //
+		// int makeEPSCollectionEnum(int n, int startNumber, int stopNummer, int numthreads, char* dataFoldName) //
 		//---------------------------------------------------------------------------------------------------//
 		if (mode == 101) // mode 101 := last step, alle Bilder ausgeben
 		{
-			makeEPSCollection(n,1,iterations, numthreads, dataFolderName, mode); //n = dimension der Matrix 
+			makeEPSCollectionEnum(n,1,iterations, numthreads, dataFolderName,1, mode); //n = dimension der Matrix 
 		}
 		else if (mode == 102) // mode 102 := last step, letztes Bild ausgegben
 		{
-			makeEPSCollection(n,iterations,iterations, numthreads, dataFolderName, mode); //n = dimension der Matrix 
+			makeEPSCollectionEnum(n,iterations,iterations, numthreads, dataFolderName,1, mode); //n = dimension der Matrix 
 		}else 
 		if ((110 <= mode  && mode < 200) || (310 <= mode  && mode < 400))
 		{
 
 			int j = mode%100;
-			for(int i = 1;i<=iterations; i+=j)
-			{
-				makeEPSCollection(n,i,i, numthreads, dataFolderName,mode); 
-			}
-			makeEPSCollection(n,iterations,iterations, numthreads, dataFolderName,mode);
+			makeEPSCollectionEnum(n,1, iterations, numthreads, dataFolderName,j, mode);
 		}
 		free(image);    	
 	} else
@@ -181,9 +177,9 @@ free(x);
 		printf("\nGeneriere Plot\n:");
 
 		//---------------------------------------------------------------------------------------------------//
-		// int makeEPSCollection(int n, int startNumber, int stopNummer, int numthreads, char* dataFoldName) //
+		// int makeEPSCollectionEnum(int n, int startNumber, int stopNumber, int numthreads, char* dataFoldName, int distance, int mode);
 		//---------------------------------------------------------------------------------------------------//
-		makeEPSCollection(n,1,n/2+1, numthreads, dataFolderName, mode); //n = dimension der Matrix 
+		makeEPSCollectionEnum(n,1,n/2+1, numthreads, dataFolderName,1, mode); //n = dimension der Matrix 
 
 		free(image);    
 		writeTime2File(startTime,"nach gnuplot", dataFolderName); 	
@@ -203,7 +199,7 @@ free(x);
 	snprintf(str1, 100,"avconv -i  %s/",dataFolderName);
   	strcpy (str2,"step%4d.png");
   	strncat (str1, str2, 40);
-	snprintf(str3, 100," -vb 8000k  -threads %d %s/%dsteps.mp4",numthreads,dataFolderName,n/2+1);
+	snprintf(str3, 100," -vb 8000k  -threads %d %s/%dsteps%04diterations.mp4",numthreads,dataFolderName,n/2+1,iterations);
 	strncat (str1, str3, 100);
 	system(str1); //film aus png erstellen	
 	writeTime2File(startTime, "Programmlaufzeit", dataFolderName); 	
