@@ -100,7 +100,7 @@ int main(int argc, const char * argv[])
 	helpString += 1;                           //
 	snprintf(dataFolderName, fileNameLength, "../data_%s_%d", helpString	, iterations);
 	printf("dataFolderName: %s\n", dataFolderName);
-	mkdir(dataFolderName);                    //Ordner erstellen
+	mkdir(dataFolderName,0666);                    //Ordner erstellen
 //--------------------------------------------------------------------	
 //Berechnung durchfuehren
 //--------------------------------------------------------------------

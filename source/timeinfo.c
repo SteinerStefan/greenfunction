@@ -54,7 +54,7 @@ int writeTime2File(time_t startTime,char* info, char *dataFolderName)
 	timedatei = fopen(path, "a"); //writing	
     if (timedatei == NULL)
     {
-        printf("Fehler beim oeffnen der Datei.");
+		perror("Fehler beim oeffnen der Datei");
         return EXIT_FAILURE;
     }
  	fprintf(timedatei, "%s: %02d:%02d:%02d\n",info,getHours(seconds),getMinutes(seconds), getSeconds(seconds));
