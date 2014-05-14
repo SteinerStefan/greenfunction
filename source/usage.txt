@@ -1,0 +1,17 @@
+#####################################################
+                    usage:
+#####################################################
+./VisualizeGreensFunction <pathOfFitsImage> <mode>
+
+mode 1xxx := zusaetzlich noch ein Video erstellen
+
+mode 100 := last step, 
+	mode 101 := last step, 	alle Bilder ausgeben
+	mode 102 := last step, 	letztes Bild ausgegben
+	mode 110 - 199 := last step jedes mode%100-ste Bild
+
+mode 200 := all steps
+
+mode 300 := Contour
+	mode 310 - 399 := last step jedes mode%100-ste Bild; Contour
+
