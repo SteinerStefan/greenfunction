@@ -122,8 +122,10 @@ int makeEPSCollectionEnum(int n, int startNumber, int stopNumber, int numthreads
 	snprintf(path, fileNameLength, "%s/step%04d.csv",dataFoldName,stopNumber);	//file-path bauen
 
 	FILE *datei = fopen(path, "r");			// stream öffnen
-	int length =7*n*7*n;					// länge der Datei
+	int length =10*n;					// länge der Datei
+
     char line[length];						// buffer
+
     while (fgets(line, length, datei))		// in buffer lesen
     {
 	for (int i=1;i<n;i++) {
