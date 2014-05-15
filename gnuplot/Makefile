@@ -2,7 +2,7 @@
 # (c) 2014 Andreas Linggi
 #
 
-CFLAGS = -Wall -g  -O2 -std=gnu99
+CFLAGS = -g  -O2 -std=gnu99
 
 FILES = main.c gnuplot.c
 

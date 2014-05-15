@@ -21,6 +21,7 @@
 //-------------------------------------------------------------------------------------------------------------------------------
 // private/ Hilfsfunktionen
 //-------------------------------------------------------------------------------------------------------------------------------
+
 int contourPlot(char* pictureName, char* sourceName, float zMin, float zMax)
 {
 	FILE *gp = popen(GNUPLOT,"w"); 					//gnuplop pipe schreiben
@@ -110,12 +111,15 @@ int makeEPSCollectionEnum(int n, int startNumber, int stopNumber, int numthreads
 	int j =1;
 	int distance = mode%100;
 	if (mode >= 600) distance +=100;
-	int anzahlBilder = stopNumber/distance;
+	int anzahlBilder = stopNumber;
+	if (distance != 0)
+	anzahlBilder = stopNumber/distance;
 
 	char pictureName [fileNameLength];  //Name des Bildes
 	char sourceName  [fileNameLength];  //Name des CSV Files
 
-	calculateMinMax(dataFoldName, stopNumber, n, &zMin, &zMax);
+printf("floatingpoint?\n%4.5f, %4.5f\n",zMin,zMax);
+	calculateMinMax(dataFoldName, stopNumber, n,&zMin,&zMax);
 	printf("zMin: %f, zMax: %f\n",zMin,zMax);
 	
 	if (100 <= mode  && mode < 500) 
