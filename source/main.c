@@ -114,13 +114,14 @@ writeTime2File(startTime,"vor Berechnung           ", dataFolderName);
 		v = image->data; //BildVektor
 		for (int i=0; i<n2; i++) x[i] = 0;		//mit null initialisieren		
 		gaussSeidel(v,x,n,iterations,numthreads, dataFolderName, n/2+1,mode); 	// Berechnungen durchführen
-	} else 
-	if (200 <= mode  && mode < 300) // mode 200 := all steps
+	} 
+	//void gaussSeidelGF(float* f, float* x, int n, int maxIterations, int numthreads, char* dataFoldName) 
+	else if (200 == mode || mode == 201) // mode 200 := all steps
 	{
 		v  =(float *) malloc(sizeof(float) * n2);  			//x lösungsvektor für diesen Schritt
 		for(greenstep = 0; greenstep <=n/2; greenstep++) 		
 		{
-			printf("Step %3d of %3d:     \n", greenstep+1, n/2+1);
+			printf("Step %5d of %5d:     \n", greenstep+1, n/2+1);
 			for(int i = 0; i<n2; i++) v[i] = 0;  				//Berechnung welche Pixeldaten verrechnet werden
 			for(int q = -greenstep; q<greenstep;q++)     
 				for(int w = -greenstep; w<greenstep;w++) 
@@ -132,8 +133,7 @@ writeTime2File(startTime,"vor Berechnung           ", dataFolderName);
 			{
 				x[i] = 0;                						// mit null initialisieren	
 			}
-
-			gaussSeidel(v,x,n,iterations,numthreads, dataFolderName, greenstep+1,mode); 	// Berechnungen durchführen
+			gaussSeidelGF(v,x,n,iterations,numthreads, dataFolderName,greenstep+1); 	// Berechnungen durchführen
 		}
 	} 
 free(v);
@@ -171,7 +171,7 @@ free(x);
 		}
 		free(image);    	
 	} else
-	if (200 <= mode  && mode < 300)
+	if (200 == mode || mode == 201)
 	{
 		makeEPSCollectionEnum(n,1,n/2+1, numthreads, dataFolderName, mode); //n = dimension der Matrix 
 

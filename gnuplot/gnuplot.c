@@ -35,6 +35,7 @@ int contourPlot(char* pictureName, char* sourceName, float zMin, float zMax)
 	fprintf(gp, "set output \"%s\"\n", pictureName);			// Dateiname 
 	fprintf(gp, "set datafile separator \",\"\n");				// für CSV File
 	fprintf(gp, "set view 0,90\n"); 							// zoom: z-Achse, Drehwinkel
+	fprintf(gp, "set zrange [%f:%f]\n",zMin,zMax); 				// Skala z-Achse
 	fprintf(gp, "set pm3d \n");									// Farbpalette aktivieren
 	fprintf(gp, "set hidden3d\n");								// Gitternetzlinien ausblenden
 	fprintf(gp, "set palette defined (  0 \"blue\", 8 \"white\", 16 \"red\")\n"); 	// Farbpalette
@@ -78,6 +79,7 @@ const char* getfield(char* line, int num)
 // min und max für die Skalierung der z-Achse aus .csv file bestimmen
 void calculateMinMax(char* dataFoldName,int stopNumber, int n, float* zMin, float* zMax)
 {
+printf("Berechne zMin, zMax\n");
 
 	char path[fileNameLength];  		// Pfad des letzten Bildes
 	int length =10*n;					// länge der Datei
@@ -108,6 +110,7 @@ int makeEPSCollectionEnum(int n, int startNumber, int stopNumber, int numthreads
 	int j =1;
 	int distance = mode%100;
 	if (mode >= 600) distance +=100;
+	int anzahlBilder = stopNumber/distance;
 
 	char pictureName [fileNameLength];  //Name des Bildes
 	char sourceName  [fileNameLength];  //Name des CSV Files
@@ -116,8 +119,31 @@ int makeEPSCollectionEnum(int n, int startNumber, int stopNumber, int numthreads
 	printf("zMin: %f, zMax: %f\n",zMin,zMax);
 	
 	if (100 <= mode  && mode < 500) 
-	{
-		if (100 <= mode  && mode < 300)
+	{	
+		if (mode == 200)
+		{
+			printf("%d Bilder werden generiert\n",anzahlBilder);
+			for (int i = 1;i<=stopNumber;i++)
+			{
+				printf("\rBild %4d von %4d",i,anzahlBilder);
+				snprintf( sourceName, fileNameLength, "%s/step%04d.csv",dataFoldName,i); 	//sourceName  -> CSV
+				snprintf( pictureName, fileNameLength, "%s/step%04d.png",dataFoldName,i);	//pictureName -> png
+				normal3DPlot(pictureName,sourceName,zMin,zMax);
+			}
+		}
+		else if (mode == 201)
+		{
+	printf("%d Bilder werden generiert\n",anzahlBilder);
+
+			for (int i = 1;i<=stopNumber;i++)
+			{			
+				printf("\rBild %4d von %4d",i,anzahlBilder);
+				snprintf( sourceName, fileNameLength, "%s/step%04d.csv",dataFoldName,i); 	//sourceName  -> CSV
+				snprintf( pictureName, fileNameLength, "%s/step%04d.png",dataFoldName,i);	//pictureName -> png
+				contourPlot(pictureName,sourceName,zMin,zMax);
+			}
+		}
+		else if (100 <= mode  && mode < 200)
 		{
 			//erstes Bild
 			snprintf( sourceName, fileNameLength, "%s/step%04d.csv",dataFoldName,1); 	//sourceName  -> CSV
@@ -151,7 +177,7 @@ int makeEPSCollectionEnum(int n, int startNumber, int stopNumber, int numthreads
 				snprintf( sourceName, fileNameLength, "%s/step%04d.csv",dataFoldName,i); 	//sourceName  -> CSV
 				snprintf( pictureName, fileNameLength, "%s/step%04d.png",dataFoldName,j);	//pictureName -> png
 				j++;
-			contourPlot(pictureName,sourceName,zMin,zMax);	
+			contourPlot(pictureName,sourceName,zMin,zMax);
 			}
 			// letztes Bild
 			snprintf( sourceName, fileNameLength, "%s/step%04d.csv",dataFoldName,stopNumber); 	//sourceName  -> CSV
@@ -162,6 +188,7 @@ int makeEPSCollectionEnum(int n, int startNumber, int stopNumber, int numthreads
 	}
 	else if (500 <= mode  && mode < 700)
 	{
+	printf("%d Bilder werden generiert\n",anzahlBilder);
 		//erstes Bild
 		snprintf( sourceName, fileNameLength, "%s/step%04d.csv",dataFoldName,1); 	//sourceName  -> CSV
 		snprintf( pictureName, fileNameLength, "%s/step%04d.png",dataFoldName,j);	//pictureName -> png
@@ -170,6 +197,7 @@ int makeEPSCollectionEnum(int n, int startNumber, int stopNumber, int numthreads
 		// jedes distance-te Bild
 		for (int i = distance;i<stopNumber;i+=distance)
 		{
+		printf("\rBild %4d von %4d",j,anzahlBilder);
 			snprintf( sourceName, fileNameLength, "%s/step%04d.csv",dataFoldName,i); 	//sourceName  -> CSV
 			snprintf( pictureName, fileNameLength, "%s/step%04d.png",dataFoldName,j);	//pictureName -> png
 			j++;
@@ -181,6 +209,7 @@ int makeEPSCollectionEnum(int n, int startNumber, int stopNumber, int numthreads
 		j++;
 		normal3DPlot(pictureName,sourceName,zMin,zMax);
 	}
+	printf("\n");
 	return 0;	
 }
 //-------------------------------------------------------------------------------------------------------------------------------
