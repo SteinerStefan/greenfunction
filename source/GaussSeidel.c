@@ -7,6 +7,7 @@
 #define testx 5
 #define testy 5
 #define tf 4 // tf = 4/h^2, normalerweise 4
+#define timePrintf 100
 //-------------------------------------------------------------------------------------------------------------------------------
 //includes
 //-------------------------------------------------------------------------------------------------------------------------------
@@ -73,6 +74,8 @@ void gaussSeidelGF(float* f, float* x, int n, int maxIterations, int numthreads,
 	float** outImage;
 	int n2 = n*n; //Flaeche n^2
 	// berechnung	
+	int a = 0;
+	int b = maxIterations/timePrintf;
 	for(int iteration = 1; iteration <= maxIterations; iteration++)	
 	{
 			#pragma omp parallel for num_threads(numthreads)
@@ -91,8 +94,14 @@ void gaussSeidelGF(float* f, float* x, int n, int maxIterations, int numthreads,
 				}
 				else x[u] = (f[u] - x[u+1] - x[u-1] - x[u-n] -x[u+n])/-tf;//punkt ist nicht am rand!!
 			}
+		a++;
+		if (a == b)
+		{
+			printf("Iteration %3d of %3d\r",iteration,maxIterations); 
+			a=0;
+		}
 		// iteration abgeschlossen
-		printf("Iteration %3d of %3d\r",iteration,maxIterations); 
+
 	}
 	outImage = newMatrixFromVector(x,n);     						// Matrix aus Vector erstellen
 	writeMatrixAsCSVtoFile(outImage, n, greenstep, dataFoldName);  	// in csv File scheiben
