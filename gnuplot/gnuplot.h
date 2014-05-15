@@ -12,7 +12,7 @@
 //startNumber ist die Nummer des ersten Bildes und stopNummer die letzte
 //int makeEPSCollection(int n, int startNumber, int stopNummer, int numthreads, char* dataFoldName, int mode);
 
-int makeEPSCollectionEnum(int n, int startNumber, int stopNumber, int numthreads, char* dataFoldName, int distance, int mode);
+int makeEPSCollectionEnum(int n, int startNumber, int stopNumber, int numthreads, char* dataFoldName, int mode);
 #endif
 //-------------------------------------------------------------------------------------------------------------------------------
 

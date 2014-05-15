@@ -39,19 +39,6 @@ int main(int argc, const char * argv[])
 //--------------------------------------------------------------------
 // Modus einlesen:
 //--------------------------------------------------------------------
-// 	mode 1xxx := zusaetzlich noch ein Video erstellen
-//	mode 100 := last step, 
-//		mode 101 := last step, 	alle Bilder ausgeben
-//		mode 102 := last step, 	letztes Bild ausgegben
-//		mode 110 - 199 := last step jedes mode%100-ste Bild
-//  mode 200 := all steps
-//
-//  mode 300 := Contour
-//		mode 310 - 399 := last step jedes mode%100-ste Bild; Contour
-//  mode...
-//
-//
-//--------------------------------------------------------------------
 	int mode = atoi(argv[2]);
 	int video = mode/1000;
 	mode = mode%1000;
@@ -104,13 +91,24 @@ int main(int argc, const char * argv[])
 //--------------------------------------------------------------------	
 //Berechnung durchfuehren
 //--------------------------------------------------------------------
-writeTime2File(startTime,"vor Berechnung", dataFolderName); 
+writeTime2File(startTime,"vor Berechnung           ", dataFolderName); 
 	printf("Starte Berechnung...\n");
 	float* x = (float *) malloc(sizeof(float) * n2);  //x lösungsvektor für diesen Schritt
 	float* v ; // =(float *) malloc(sizeof(float) * n2);  //x lösungsvektor für diesen Schritt
 	int greenstep = 0;
 
-	if ((100 <= mode  && mode < 200) || (300 <= mode  && mode < 400)) // mode 100 := last step, 
+	if (500 <= mode  && mode < 700)
+	{
+		int distance = mode%100;
+		if (mode >= 600) distance +=100;
+		printf("Mode %d: High Perfomance, every %d-th iteration wil be saved\n", mode,distance);
+		v = image->data; //BildVektor
+		for (int i=0; i<n2; i++) x[i] = 0;		//mit null initialisieren
+
+		//void gaussSeidelHP(float* f, float* x, int n, int maxIterations, int numthreads, char* dataFoldName, int mode) 
+		gaussSeidelHP(v, x, n,iterations,numthreads, dataFolderName, mode);
+	} 
+	else if ((100 <= mode  && mode < 200) || (300 <= mode  && mode < 400)) // mode 100 := last step, 
 	{
 		printf("Mode %d: last step\n", mode);
 		v = image->data; //BildVektor
@@ -138,7 +136,6 @@ writeTime2File(startTime,"vor Berechnung", dataFolderName);
 			gaussSeidel(v,x,n,iterations,numthreads, dataFolderName, greenstep+1,mode); 	// Berechnungen durchführen
 		}
 	} 
-writeTime2File(startTime,"nach Berechnung", dataFolderName); 	
 free(v);
 free(x);
 //--------------------------------------------------------------------
@@ -150,36 +147,33 @@ free(x);
 //--------------------------------------------------------------------
 //Gnuplot erstellen
 //--------------------------------------------------------------------
-	if ((100 <= mode  && mode < 200) || (300 <= mode  && mode < 400))
+	writeTime2File(startTime,"Generiere Plot           ", dataFolderName); 
+	printf("\nGeneriere Plot:\n");
+
+	if (500 <= mode  && mode < 700)
 	{
-		printf("\nGeneriere Plot:\n");
-		//---------------------------------------------------------------------------------------------------//
-		// int makeEPSCollectionEnum(int n, int startNumber, int stopNummer, int numthreads, char* dataFoldName) //
-		//---------------------------------------------------------------------------------------------------//
+	//int makeEPSCollectionEnum(int n, int startNumber, int stopNumber, int numthreads, char* dataFoldName, int mode)
+	makeEPSCollectionEnum(n,1, iterations, numthreads, dataFolderName, mode);	
+	}
+	else if ((100 <= mode  && mode < 200) || (300 <= mode  && mode < 400))
+	{
 		if (mode == 101) // mode 101 := last step, alle Bilder ausgeben
 		{
-			makeEPSCollectionEnum(n,1,iterations, numthreads, dataFolderName,1, mode); //n = dimension der Matrix 
+			makeEPSCollectionEnum(n,1,iterations, numthreads, dataFolderName, mode); //n = dimension der Matrix 
 		}
 		else if (mode == 102) // mode 102 := last step, letztes Bild ausgegben
 		{
-			makeEPSCollectionEnum(n,iterations,iterations, numthreads, dataFolderName,1, mode); //n = dimension der Matrix 
+			makeEPSCollectionEnum(n,iterations,iterations, numthreads, dataFolderName, mode); //n = dimension der Matrix 
 		}else 
 		if ((110 <= mode  && mode < 200) || (310 <= mode  && mode < 400))
 		{
-
-			int j = mode%100;
-			makeEPSCollectionEnum(n,1, iterations, numthreads, dataFolderName,j, mode);
+			makeEPSCollectionEnum(n,1, iterations, numthreads, dataFolderName, mode);
 		}
 		free(image);    	
 	} else
 	if (200 <= mode  && mode < 300)
 	{
-		printf("\nGeneriere Plot\n:");
-
-		//---------------------------------------------------------------------------------------------------//
-		// int makeEPSCollectionEnum(int n, int startNumber, int stopNumber, int numthreads, char* dataFoldName, int distance, int mode);
-		//---------------------------------------------------------------------------------------------------//
-		makeEPSCollectionEnum(n,1,n/2+1, numthreads, dataFolderName,1, mode); //n = dimension der Matrix 
+		makeEPSCollectionEnum(n,1,n/2+1, numthreads, dataFolderName, mode); //n = dimension der Matrix 
 
 		free(image);    
 		writeTime2File(startTime,"nach gnuplot", dataFolderName); 	
@@ -187,8 +181,10 @@ free(x);
 //--------------------------------------------------------------------
 //Video erstellen
 //--------------------------------------------------------------------
+
 	if (video != 0)
 	{
+	writeTime2File(startTime,"erstelle Video           ", dataFolderName); 
 	printf("Generiere movie\n");
 	writeTime2File(startTime,"Generiere movie", dataFolderName); 	
 	char moviePath[fileNameLength];  //name des Ordners
@@ -205,6 +201,7 @@ free(x);
 	writeTime2File(startTime, "Programmlaufzeit", dataFolderName); 	
 	}
 //	system("cat timing.txt");
+	writeTime2File(startTime,"Programm ende            ", dataFolderName); 
 	return EXIT_SUCCESS;
 }
 //-------------------------------------------------------------------------------------------------------------------------------

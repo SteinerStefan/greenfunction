@@ -34,7 +34,7 @@ int writeMatrixAsCSVtoFile(float** A, int n, int step, char* dataFoldName)
 	{
         for (int j =0; j<n; j++) 
 		{
-            fprintf (datei, "%5.3f",A[i][j]);
+            fprintf (datei, "%5.1f",A[i][j]);
             if (!(n-1==j)) 
 			{
                 fprintf (datei, ", ");
