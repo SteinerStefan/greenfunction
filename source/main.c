@@ -133,6 +133,7 @@ writeTime2File(startTime,"vor Berechnung           ", dataFolderName);
 			{
 				x[i] = 0;                						// mit null initialisieren	
 			}
+			plotTime(startTime);
 			gaussSeidelGF(v,x,n,iterations,numthreads, dataFolderName,greenstep+1); 	// Berechnungen durchführen
 		}
 	} 
