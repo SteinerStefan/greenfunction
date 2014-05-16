@@ -96,11 +96,11 @@ writeTime2File(startTime,"vor Berechnung           ", dataFolderName);
 	float* v ; // =(float *) malloc(sizeof(float) * n2);  //x lösungsvektor für diesen Schritt
 	int greenstep = 0;
 
-	if (500 <= mode  && mode < 700)
+	if (500 <= mode  && mode < 900)
 	{
 		int distance = mode%100;
-		if (mode >= 600) distance +=100;
-		printf("Mode %d: High Perfomance, every %d-th iteration wil be saved\n", mode,distance);
+		if (mode >= 600) distance += ((mode-500)/100)*100;
+		printf("Mode %d: High Perfomance, every %d-th iteration will be saved\n", mode,distance);
 		v = image->data; //BildVektor
 		for (int i=0; i<n2; i++) x[i] = 0;		//mit null initialisieren
 
@@ -150,7 +150,7 @@ free(x);
 	writeTime2File(startTime,"Generiere Plot           ", dataFolderName); 
 	printf("\nGeneriere Plot:\n");
 
-	if (500 <= mode  && mode < 700)
+	if (500 <= mode  && mode < 900)
 	{
 	//int makeEPSCollectionEnum(int n, int startNumber, int stopNumber, int numthreads, char* dataFoldName, int mode)
 	makeEPSCollectionEnum(n,1, iterations, numthreads, dataFolderName, mode);	

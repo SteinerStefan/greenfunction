@@ -15,4 +15,4 @@ mode 200 := all steps
 mode 300 := Contour
 	mode 310 - 399 := last step jedes mode%100-ste Bild; Contour
 
-mode 500 - 700 := last step jedes mode%100-ste Bild (hier 1-199-te Bild)
+mode 500 - 900 := last step jedes (mode-500)-ste wird gespeichert und generiert

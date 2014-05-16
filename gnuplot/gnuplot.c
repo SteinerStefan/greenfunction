@@ -110,7 +110,7 @@ int makeEPSCollectionEnum(int n, int startNumber, int stopNumber, int numthreads
 	float zMax = 0;
 	int j =1;
 	int distance = mode%100;
-	if (mode >= 600) distance +=100;
+	if (mode >= 600) distance += ((mode-500)/100)*100;
 	int anzahlBilder = stopNumber;
 	if (distance != 0)
 	anzahlBilder = stopNumber/distance;
@@ -136,7 +136,7 @@ int makeEPSCollectionEnum(int n, int startNumber, int stopNumber, int numthreads
 		}
 		else if (mode == 201)
 		{
-	printf("%d Bilder werden generiert\n",anzahlBilder);
+		printf("%d Bilder werden generiert\n",anzahlBilder);
 
 			for (int i = 1;i<=stopNumber;i++)
 			{			
@@ -189,7 +189,7 @@ int makeEPSCollectionEnum(int n, int startNumber, int stopNumber, int numthreads
 			contourPlot(pictureName,sourceName,zMin,zMax);	
 		}
 	}
-	else if (500 <= mode  && mode < 700)
+	else if (500 <= mode  && mode < 900)
 	{
 	printf("%d Bilder werden generiert\n",anzahlBilder);
 		//erstes Bild

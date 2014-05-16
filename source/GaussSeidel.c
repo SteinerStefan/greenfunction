@@ -23,7 +23,7 @@
 void gaussSeidelHP(float* f, float* x, int n, int maxIterations, int numthreads, char* dataFoldName, int mode) 
 {
 	// pruefen auf mode
-	if (mode >= 700 || mode <= 500) return;
+	if (mode > 900 || mode <= 500) return;
 
 	//Variablen
 	float** outImage;
@@ -33,7 +33,7 @@ void gaussSeidelHP(float* f, float* x, int n, int maxIterations, int numthreads,
 
 	// distance zwischen iterationen, die abgespeichert werden
 	int distance = mode%100;
-	if (mode >= 600) distance +=100;
+	if (mode >= 600) distance += ((mode-500)/100)*100;
 	
 	// berechnung	
 	for(int iteration = 1; iteration <= maxIterations; iteration++)	
