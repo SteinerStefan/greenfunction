@@ -28,6 +28,8 @@ void gaussSeidelHP(float* f, float* x, int n, int maxIterations, int numthreads,
 	//Variablen
 	float** outImage;
 	int n2 = n*n; //Flaeche n^2
+	int a = 0;
+	int b = maxIterations/timePrintf;
 
 	// distance zwischen iterationen, die abgespeichert werden
 	int distance = mode%100;
@@ -52,9 +54,13 @@ void gaussSeidelHP(float* f, float* x, int n, int maxIterations, int numthreads,
 				}
 				else x[u] = (f[u] - x[u+1] - x[u-1] - x[u-n] -x[u+n])/-tf;//punkt ist nicht am rand!!
 			}
+		a++;
+		if (a == b)
+		{
+			printf("Iteration %3d of %3d\r",iteration,maxIterations); 
+			a=0;
+		}
 		// iteration abgeschlossen
-		printf("Iteration %3d of %3d\r",iteration,maxIterations); 
-
 		//------------------------------------------------------------------------
 		// um datenflut zu verhindern wird nur die benoetigten daten abgespeichert
 		if (iteration%distance == 0 || iteration==1 || iteration == maxIterations)

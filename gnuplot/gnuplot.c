@@ -118,7 +118,6 @@ int makeEPSCollectionEnum(int n, int startNumber, int stopNumber, int numthreads
 	char pictureName [fileNameLength];  //Name des Bildes
 	char sourceName  [fileNameLength];  //Name des CSV Files
 
-printf("floatingpoint?\n%4.5f, %4.5f\n",zMin,zMax);
 	calculateMinMax(dataFoldName, stopNumber, n,&zMin,&zMax);
 	printf("zMin: %f, zMax: %f\n",zMin,zMax);
 	

@@ -65,7 +65,6 @@ int main(int argc, const char * argv[])
     int numthreads = 4;   		//Threads zum Brauchen
 	time_t startTime;
 	time(&startTime);		//timer starten
-	printf("startTime: %i\n",startTime);
 	char dataFolderName[fileNameLength];  //name des Ordners
 
 //--------------------------------------------------------------------
@@ -201,8 +200,16 @@ free(x);
 	system(str1); //film aus png erstellen	
 	writeTime2File(startTime, "Programmlaufzeit", dataFolderName); 	
 	}
-//	system("cat timing.txt");
+
+	//Bericht
 	writeTime2File(startTime,"Programm ende            ", dataFolderName); 
+	char str1[200];
+	snprintf(str1, 100,"cat %s/*.txt\n",dataFolderName);
+	printf("Bericht: \n-----------------------------------\n");
+	printf("Bild:            %s\n",argv[1]);
+	printf("Iterationen:     %d\n",iterations);
+	printf("Zeiten:\n");
+	system(str1);
 	return EXIT_SUCCESS;
 }
 //-------------------------------------------------------------------------------------------------------------------------------
