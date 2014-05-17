@@ -7,12 +7,12 @@
 #ifndef gnuplot_h
 #define gnuplot_h
 
-//generiert GNU-Plot aus einem CSV file
-//pictureNumber ist die Number, die das Bild bekommt.
-int makeEPSWithCSV(int pictureNumber, char* dataFoldName, float zMin, float zMax); 
+
 //generiert eine Folge von Bildern aus CSV files
 //startNumber ist die Nummer des ersten Bildes und stopNummer die letzte
-int makeEPSCollection(int n, int startNumber, int stopNummer, int numthreads, char* dataFoldName, int mode);
+//int makeEPSCollection(int n, int startNumber, int stopNummer, int numthreads, char* dataFoldName, int mode);
+
+int makeEPSCollectionEnum(int n, int startNumber, int stopNumber, int numthreads, char* dataFoldName, int mode);
 #endif
 //-------------------------------------------------------------------------------------------------------------------------------
 

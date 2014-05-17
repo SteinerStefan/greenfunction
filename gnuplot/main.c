@@ -9,12 +9,24 @@
 //includes
 //-------------------------------------------------------------------------------------------------------------------------------
 #include "gnuplot.h"
+#include <stdlib.h>
 //-------------------------------------------------------------------------------------------------------------------------------
 //main
 //-------------------------------------------------------------------------------------------------------------------------------
 int main (int argc, char * argv[]) 
-{
-	makeEPSCollection(0,200);
+{ 
+	if (argc <= 4) 
+	{
+		system("cat usage.txt");
+		return EXIT_FAILURE;
+	}
+	char * dataFolderName =argv[1]; //
+	int numberOfPictures = atoi(argv[2]);
+	int n = atoi(argv[3]);
+	int numthreads = atoi(argv[4]);
+	int mode = 200;
+
+	makeEPSCollectionEnum(n,1,numberOfPictures, numthreads, dataFolderName, mode); //n = dimension der Matrix 
 	return 0;
 }
 //-------------------------------------------------------------------------------------------------------------------------------
