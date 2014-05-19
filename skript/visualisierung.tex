@@ -8,35 +8,7 @@
 	
 	Mit der Green-Funtion können bei einer partiellen DGL 2. Ordnung einzelne Punkte berechnet werden. Um das zu visualisieren, berechnen wir einzelne Ringe bzw. Quadrate vom Zentrum ausgehen nach aussen. Man könnte natürlich auch jeder Punkt einzeln dazu nehmen, was mehr Berechnungen erfordert.
 	
-	\[
-		f=\left(
-		\begin{array}{ccccc}
-		    f_{11}& f_{12}& f_{13}& f_{14}& f_{15}\\
-			f_{21}& f_{22}& f_{23}& f_{24}& f_{25}\\
-			f_{31}& f_{32}& \red{f_{33}}& f_{34}& f_{35}\\
-			f_{41}& f_{42}& f_{43}& f_{44}& f_{45}\\
-			f_{51}& f_{52}& f_{53}& f_{54}& f_{55}\\
-		\end{array}
-		\right) \Rightarrow
-		\left(
-		\begin{array}{ccccc}
-		    f_{11}& f_{12}& f_{13}& f_{14}& f_{15}\\
-			f_{21}& \red{f_{22}}& \red{f_{23}}& \red{f_{24}}& f_{25}\\
-			f_{31}& \red{f_{32}}& \red{f_{33}}& \red{f_{34}}& f_{35}\\
-			f_{41}& \red{f_{42}}& \red{f_{43}}& \red{f_{44}}& f_{45}\\
-			f_{51}& f_{52}& f_{53}& f_{54}& f_{55}\\
-		\end{array}\right)
-		\Rightarrow
-		\left(\red{
-		\begin{array}{ccccc}
-		    f_{11}& f_{12}& f_{13}& f_{14}& f_{15}\\
-			f_{21}& f_{22}& f_{23}& f_{24}& f_{25}\\
-			f_{31}& f_{32}& f_{33}& f_{34}& f_{35}\\
-			f_{41}& f_{42}& f_{43}& f_{44}& f_{45}\\
-			f_{51}& f_{52}& f_{53}& f_{54}& f_{55}\\
-		\end{array}}
-		\right)
-		\]
+
 	
 	Diese einzelnen Schritte werden vollständig berechnet und dann als .csv abgespeichert. Die Bilder werden nachdem alle Einzelschritte berechnet wurden aus den Dateien wiederum parallelisiert in einer \verb|for|-Schleife zu .png Bilddateien verarbeitet. Die Skalierung der z-Achse wird direkt aus den Daten des letzten Schrittes berechnet, was uns eine optimale Darstellung garantiert. Aus den Bilddateien wird am Schluss optional noch ein Video erstellt.
 		
