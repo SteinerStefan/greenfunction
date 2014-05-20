@@ -20,7 +20,13 @@
 %--------------------------------------------- Name von Eigener Liste
 \newcommand{\nameoflist}{\oheaderinfo \hspace{1cm}\small{\authorinfo} \hspace{3cm}\today}
 
+%\usepackage[style=ieee,backend=bibtex]{biblatex}
+\usepackage[backend=bibtex]{biblatex}
+\bibliography{quellen}
+
 \include{header}
+
+
 
 \begin{document}
 
@@ -33,5 +39,6 @@
 \input{Fits}
 \input{probleme}
 
+\printbibliography
 
 \end{document}
