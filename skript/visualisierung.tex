@@ -6,11 +6,11 @@
 	
 	Um das zu automatisieren benutzen wir später Gnuplot, welches sich mit C-Code ohne Probleme ansprechen lässt und uns die Bilder automatisch mit dem vorgegebenen Einstellungen erstellt.
 	
-	Gnuplot ist ein Kommandozeilen basiertes OpenSource Tool, das aber auch mit GUI erhältlich ist. Über eine Pipe lassen sich lassen sich alle Einstellungen vornehmen und aus dem .CSV-File ein PNG generieren.
+	Gnuplot ist ein Kommandozeilen basiertes OpenSource Tool, das aber auch mit GUI erhältlich ist. Über eine Pipe ist es möglich alle Einstellungen vorzunehmen. Dadurch kann aus einem .CSV-File ein PNG generiert werden.
 	
 	\lstinputlisting{./gnuplot.c}
 	
-	Mit der Green-Funtion können bei einer partiellen DGL 2. Ordnung einzelne Punkte berechnet werden. Um das zu visualisieren, berechnen wir einzelne Ringe bzw. Quadrate vom Zentrum ausgehen nach aussen. Man könnte natürlich auch jeder Punkt einzeln dazu nehmen, was mehr Berechnungen erfordert.
+	Mit der Greenschen Funktion können bei einer partiellen Differentialgleichung zweiter Ordnung einzelne Punkte berechnet werden. Um das zu visualisieren, berechnen wir einzelne Ringe bzw. Quadrate vom Zentrum ausgehend nach aussen. Man könnte natürlich auch jeden Punkt einzeln dazu nehmen, was mehr Berechnungen erfordert.
 	
 		\[
 			f=\left(
@@ -43,5 +43,5 @@
 			\]
 
 	
-	Diese einzelnen Schritte werden vollständig berechnet und dann als .csv abgespeichert. Die Bilder werden nachdem alle Einzelschritte berechnet wurden aus den Dateien wiederum parallelisiert in einer \verb|for|-Schleife zu .png Bilddateien verarbeitet. Die Skalierung der z-Achse wird direkt aus den Daten des letzten Schrittes berechnet, was uns eine optimale Darstellung garantiert. Aus den Bilddateien wird am Schluss optional noch ein Video erstellt.
+	Diese einzelnen Schritte werden vollständig berechnet und als CSV-Datei abgespeichert. Die Bilder werden nachdem alle Einzelschritte berechnet wurden, aus den Dateien wiederum parallelisiert in einer \verb|for|-Schleife zu .png Bilddateien verarbeitet. Die Skalierung der z-Achse wird direkt aus den Daten des letzten Schrittes berechnet, was uns eine optimale Darstellung garantiert. Aus den Bilddateien wird am Schluss optional noch ein Video erstellt.
 		
