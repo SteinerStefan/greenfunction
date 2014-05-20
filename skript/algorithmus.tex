@@ -75,36 +75,8 @@
 		for (i = 0; i < dim; i++)
 		{ ...
 \end{code}
-
-	\subsection{Probleme}
 		
-		Die Fläche $f$ kann alle möglichen Werte als Anfangsbedingung haben. Wir haben anfangs den  HSR-Schriftzug als FITS-File (\fref{sec:FITS}) in eine Matrix 
-
-		eingelesen. Der maximale Wert betrug anfangs nur 255,
-		stieg nach einigen hundert Iterationen auf über 3000 an und die Funktion nahm die Form eines Haufen an. Wir hatten mit einem anderem Resultat gerechnet und überprüften unseren Algorithmus. Wir konnten keinen Fehler entdecken und konnten die Werte mit MATLAB verifizieren. Die nächste Frage war, ob der Gauss-Seidel konvergiert. Wir berechneten den Spektralradius der Matrix $A$ gemäss Definition\;5.1 aus dem Skript HPC:
 		
-		\begin{eqnarray}
-			A = M+N\\
-			\varrho(M^{-1}N)<1
-		\end{eqnarray}
 		
-		Da die Berechnung schnell sehr rechenaufwendig wird, man beachte, dass die Grösse der Matrix $A$ mit $n^4$ zunimmt, haben wir Matrizen mit kleinen $n$ berechnet. 	
 		
-		\begin{table}[h]
-			\begin{tabular}{cc}
-				n & Specktralradius $\varrho$\\\midrule
-				5 & 0.7500\\
-				10 & 0.92063\\
-				15 & 0.96194\\
-				20 & 0.97779\\
-				25 & 0.98547\\
-				40 & 0.99414
-			\end{tabular}
-			\centering
-			\caption{Spaktralradien der Matrix $A$ für eine Matrix $f$ mit der Grösse $n\times n$}
-		\end{table}
-
-		Einerseits sind alle Werte kleiner Eins, was gut ist, andererseits sind die Werte sehr nahe bei Eins, was erklärt wieso unser Algorithmus so langsam konvergiert.
-		
-		Wir hatten später Erfolge, wenn wir die Anfangswert der Matrix $f$ sehr klein wählten. So waren die Fehler schon von ang
 
