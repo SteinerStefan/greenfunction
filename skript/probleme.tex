@@ -1,8 +1,8 @@
 \section{Probleme}
 	
 	Die Fläche $f$ kann alle möglichen Werte als Anfangsbedingung haben. Wir haben anfangs den  HSR-Schriftzug als FITS-File in eine Matrix 
-	eingelesen. Der maximale Wert betrug anfangs nur 255,
-	stieg nach einigen hundert Iterationen auf über 3000 an und die Funktion nahm die Form eines Haufen an. Wir hatten mit einem anderem Resultat gerechnet und überprüften unseren Algorithmus. Wir konnten keinen Fehler entdecken und konnten die Werte mit MATLAB verifizieren. Die nächste Frage war, ob der Gauss-Seidel konvergiert. Wir berechneten den Spektralradius der Matrix $A$ gemäss Definition\;5.1 aus dem Skript HPC\cite{mueller:hpcseminar}:
+	eingelesen. Der maximale Wert des $x$ Vektors betrug anfangs nur 255,
+	stieg nach einigen hundert Iterationen auf über 3000 an und die Funktion nahm die Form eines Haufen an. Wir hatten mit einem anderem Resultat gerechnet und überprüften unseren Algorithmus. Wir entdeckten keinen Fehler in unserem Algorithmus und konnten die Werte mit MATLAB verifizieren. Die nächste Frage war, ob der Gauss-Seidel konvergiert. Wir berechneten den Spektralradius der Matrix $A$ gemäss Definition\;5.1 aus dem Skript HPC\cite{mueller:hpcseminar}:
 	
 	\begin{eqnarray}
 		A = M+N\\
