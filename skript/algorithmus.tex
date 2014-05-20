@@ -7,7 +7,7 @@
 		\label{eq:gleichung}
 	\end{equation}
 	
-	Dabei haben wir bei beiden Matrizen die Spalten untereinander gereiht und so je einen Vektor mit der Länge $n^2$ erhalten. Mathematisch macht das keinen Unterschied, solange wir am Schluss den Lösungsvektor wieder auf die selbe Art und Weise zu einer Matrix zusammenfügen.
+	Dabei haben wir bei beiden Matrizen die Spalten untereinander gereiht und so je einen Vektor mit der Länge $n^2$ erhalten. Mathematisch macht es keinen Unterschied, solange wir am Schluss den Lösungsvektor wieder auf die selbe Art und Weise zu einer Matrix zusammenfügen.
 	
 \[
 	A=\left(
@@ -35,7 +35,7 @@
 	\right) 
 	\]
 	
-	Die Matrix $A$ enthält die Koeffizienten für die partielle Differentialgleichung 2. Ordnung, wie wir sie in der Vorlesung hergeleitet haben. Sie hat die Grösse $n^2 \times n^2$. Diese Matrix auf dem heap zu allozieren wäre für mittelgrosse Matrizen schon nicht mehr möglich.
+	Die Matrix $A$ enthält die Koeffizienten für die partielle Differentialgleichung der zweiten Ordnung. Sie hat die Grösse $n^2 \times n^2$. Diese Matrix auf dem Heap zu allozieren wäre für mittelgrosse Matrizen schon nicht mehr möglich.\cite{mueller:hpcseminar}
 	
 	
 	
@@ -45,7 +45,7 @@
 		500^2 \times 500^2 \cdot 4\;\mathrm{Byte} = 232.8\;\mathrm{GByte}
 	\end{equation}
 	
-	Mit $n = 1000$ sogar 3.64\;TByte, also definitiv zu viel. Aber das ist auch gar nicht nötig. Es müssen jeweils nur die Nachbarelemente von $f_k$ addiert und durch einen konstanten Faktor geteilt werden, die Randelemente sind dabei Null zusetzen.
+	Mit $n = 1000$ sogar 3.64\;TByte, also definitiv zu viel. Dies ist aber auch gar nicht nötig. Es müssen jeweils nur die Nachbarelemente von $f_k$ addiert und durch einen konstanten Faktor geteilt werden, die Randelemente sind dabei Null zu setzen.
 
 	\begin{eqnarray}
 		f_k = U_{k-1}+U_{k+1}+U_{k-(n-1)}+U_{k+(n-1)}-4U_k
