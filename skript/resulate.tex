@@ -1,28 +1,32 @@
 \section{Resultate}
 
-In unserem Schlussresultat ist die Superposition gut erkennbar. Ausgangsbild war eine Spirale auf der sich einige Punkte befinden mit der gleichen Stromstärke. Pro Bild führten wir 180\,000 Iterationen durch.
+		Wir haben verschiedene Flächen mit verschiedenen Auflösungen berechnet. Je nach Ausgangsbild ist die Superposition mehr oder weniger gut erkennbar. Wie in \fref{sec:geeignetesF} erwähnt, hat sich eine Spirale von Punkten bewährt, die wir hier anhand vier verschiedenen Schritten zeigen wollen. Das erste Bild ist jeweils die Fläche $f$ für den jeweiligen Schritt, alle Punkte haben das selbe Potential. Pro Bild führten wir 180\,000 Iterationen durch.
+	
 
-\newlength\breite
-\setlength\breite{8cm}
-
-\begin{figure}
-		\centering
-	\begin{tabular}{cc}
-		\includegraphics[width=\breite]{./images/resultate/step0111.png}
-		& \includegraphics[width=\breite]{./images/resultate/step0112.png}\\
-		\includegraphics[width=\breite]{./images/resultate/step0113.png}
-		& \includegraphics[width=\breite]{./images/resultate/step0138.png}
-	\end{tabular}		
-		\caption{Visualisierung von Green's Function: Schritte 111, 112, 113, 138}
-\end{figure}
-
-\begin{figure}
-		\centering
-	\begin{tabular}{cc}
-		\includegraphics[width=\breite]{./images/resultate/step0144.png}
-		& \includegraphics[width=\breite]{./images/resultate/step0149.png}\\
-		\includegraphics[width=\breite]{./images/resultate/step0162.png}
-		& \includegraphics[width=\breite]{./images/resultate/step0175.png}
-	\end{tabular}		
-		\caption{Visualisierung von Green's Function: Schritte 144, 149, 162, 175 }
-\end{figure}
+	\newlength\breite
+	\setlength\breite{8cm}
+	\begin{figure}[h]
+			\centering
+		\begin{tabular}{cc}
+			\includegraphics[width=\breite]{./images/resultate/grfl/step0057.png}
+			& \includegraphics[width=\breite]{./images/resultate/grfl/step0111.png}\vspace{1cm}\\
+			\includegraphics[width=\breite]{./images/resultate/cp/step0057.png}
+			& \includegraphics[width=\breite]{./images/resultate/cp/step0111.png}\vspace{1cm}\\
+			\includegraphics[width=\breite]{./images/resultate/np/step0057.png}
+			& \includegraphics[width=\breite]{./images/resultate/np/step0111.png}
+		\end{tabular}		
+			\caption{Visualisierung von Green's Function: Schritte 75 und 111 }
+	\end{figure}
+	
+	\begin{figure}[h]
+			\centering
+		\begin{tabular}{cc}
+			\includegraphics[width=\breite]{./images/resultate/grfl/step0144.png}
+			& \includegraphics[width=\breite]{./images/resultate/grfl/step0175.png}\vspace{1cm}\\
+			\includegraphics[width=\breite]{./images/resultate/cp/step0144.png}
+			& \includegraphics[width=\breite]{./images/resultate/cp/step0175.png}\vspace{1cm}\\
+			\includegraphics[width=\breite]{./images/resultate/np/step0144.png}
+			& \includegraphics[width=\breite]{./images/resultate/np/step0175.png}
+		\end{tabular}		
+			\caption{Visualisierung von Green's Function: Schritte 144 und 175 }
+	\end{figure}

@@ -81,3 +81,12 @@
 }
 %---------------------------------------------
 \newcommand{\dunderline}[1]{\underline{\underline{#1}}}
+
+%------------------- Graue Beispielboxen ------------------- %
+\usepackage{framed}
+\definecolor{MyBoxColor}{rgb}{0.9,0.9,0.9}
+\newenvironment{shadedSmaller}{
+  \def\FrameCommand{\fboxsep=\FrameSep \colorbox{MyBoxColor}}
+  \MakeFramed {\advance\hsize-2\width\FrameRestore}}
+{\endMakeFramed}
+%----------------------------------------------------------- %
