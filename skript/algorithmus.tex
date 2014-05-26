@@ -16,13 +16,13 @@
 	\end{equation}
 	Wobei die Rand-, und Anfangsbedingungen auf der leitenden Platte alle null sind. 
 	
-	Die Platte wird dabei diskretisiert. Wir bekommen eine endliche Anzahl an Punkten. Dabei wird für jeden Punkt diese Gleichung gelöst. Der Ansatz für eine Lösung dieses Problems bietet die lineare Algebra. Welche bereits im Theorie teil des Skriptes ausführlich hergeleitet wird. Das bedeutet, wir müssen ein Problem folgender Art lösen.
+	Die Platte wird dabei diskretisiert. Wir bekommen eine endliche Anzahl an Punkten. Dabei wird für jeden Punkt diese Gleichung gelöst. Der Ansatz für eine Lösung dieses Problems bietet die lineare Algebra, welche bereits im Theorieteil des Skriptes ausführlich hergeleitet wird. Das bedeutet, wir müssen ein Problem folgender Art lösen.
 	\begin{equation}
-		Ax = b
+		Ax = f
 	\end{equation}
-	Es sei dabei $A$ die Koeffizientenmatrix, $b$ der Störvektor und $x$ der Lösungsvektor. 
+	Es sei dabei $A$ die Koeffizientenmatrix, $f$ der Störvektor und $x$ der Lösungsvektor. 
 	
-	Die leitenden Platten $b$ und $x$ werden als eine Fläche visualisiert. Um diese Als Vektor zu schreiben ist dabei festgelegt worden, dass die Spalten dieser diskretisierten Fläche untereinander geschrieben werden. Dies ergibt Vektoren der länge $n^2$.
+	Die leitenden Platten $f$ und $x$ werden als eine Fläche visualisiert. Um diese als Vektor zu schreiben ist dabei festgelegt worden, dass die Spalten dieser diskretisierten Fläche untereinander geschrieben werden. Dies ergibt Vektoren der länge $n^2$.
 	
 	Aus diesem Zusammenhang heraus ergibt sich dabei die Koeffizientenmatrix $A$. 
 \[
@@ -86,15 +86,16 @@
 		Wie schon beim Kugelsternhaufen erwähnt, ist nun diese Open-MP Parallelisierung einfach zu realisieren, wie folgendes Beispiel schön zeigt. 
 		
 \begin{code}
+// Parallelisierung einer for-Schleife
 	int numthreads = 32;
 	#pragma omp parallel for num_threads(numthreads)
 		for (i = 0; i < dim; i++)
 		{ ...
 \end{code}
 	\subsubsection{Dateiformate}
-	Um mit der Datenflut umgehen zu können, die entsteht, wenn man mit solchen Problemen zu tun hat, musste ebenfalls eine Lösung entwickelt werden. Als Eingabedatei wurde ein Bild im FITS Format verwendet. Da es jedoch einfacher schien wurde während des Programmes mit CSV Files gearbeitet. Dabei war der technische Aufwand gering und die Resultate konnten schnell kontrolliert werden. Aus diesen CSV Dateien kann mit GNU-Plot ein Bild erstellt werden. Optional dienen diese als Vorlage für einen kurzen Film. 
+	Um mit der Datenflut umgehen zu können, die entsteht, wenn man mit solchen Problemen zu tun hat, musste ebenfalls eine Lösung entwickelt werden. Als Eingabedatei wurde ein Bild im FITS Format verwendet. Da es jedoch einfacher schien wurde während des Programmes mit .csv Files gearbeitet. Dabei war der technische Aufwand gering und die Resultate konnten schnell kontrolliert werden. Aus diesen .csv Dateien kann mit GNU-Plot ein Bild erstellt werden. Optional dienen diese als Vorlage für einen kurzen Film. 
 	
-	Da FITS ein für uns unbekanntes Dateiformat war, haben wir uns entschieden, dieses kurz zu erläutern.	
+	Da .fits ein für uns unbekanntes Dateiformat war, haben wir uns entschieden, dieses kurz zu erläutern.	
 
 	Flexible Image Transport System ist die ausgeschriebene Bezeichnung für das Wort FITS. Es ist ein quelloffenes Dateiformat, womit Daten verlustlos abgespeichert werden können. Die Nasa entwickelte es und in der Astronomie hat es sich als Standardformat etabliert.  Informationen können in verschiedenen Layern abgelegt werden. Das bedeutet, ein Gitterpunkt in einem Datenfeld kann unterschiedliche Informationen enthalten. Angenehm ist ausserdem, dass die Werte direkt in Flisskommadarstellung abgespeichert werden können \cite{nasa:fits}. Angenehm ist, dass mit vielen gängigen Bildbearbeitungsprogrammen dieses Dateiformat angeschaut werden kann.
 		

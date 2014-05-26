@@ -3,7 +3,7 @@
 	
 		Die Fläche $f$ kann alle möglichen Werte als Anfangsbedingung haben. Wir haben anfangs den  HSR-Schriftzug als FITS-File in eine Matrix 
 		eingelesen. Der maximale Wert des $x$ Vektors betrug anfangs nur 255,
-		stieg nach einigen hundert Iterationen auf über 3000 an und die Funktion nahm die Form eines Haufen an. Wir hatten mit einem anderem Resultat gerechnet und überprüften unseren Algorithmus. Wir entdeckten keinen Fehler in unserem Algorithmus und konnten die Werte mit MATLAB verifizieren. Die nächste Frage war, ob der Gauss-Seidel konvergiert. Wir berechneten den Spektralradius der Matrix $A$ gemäss Definition\;5.1 aus dem Skript HPC\cite{mueller:hpcseminar}:
+		stieg nach einigen hundert Iterationen auf über 3000 an und die Funktion nahm die Form eines Haufens an. Wir hatten mit einem anderem Resultat gerechnet und überprüften unseren Algorithmus. Wir entdeckten keinen Fehler in unserem Algorithmus und konnten die Werte mit MATLAB verifizieren. Die nächste Frage war, ob der Gauss-Seidel konvergiert. Wir berechneten den Spektralradius der Matrix $A$ gemäss Definition\;5.1 aus dem Skript HPC\cite{mueller:hpcseminar}:
 	
 		\begin{eqnarray}
 			A = M+N\\
@@ -37,9 +37,9 @@
 		\begin{shadedSmaller}
 			Als Beispiel:
 			
-			Wir wollen eine $40 \times 40$ Fläche berechnen. Um die Konvergenz beobachten zu können, speichern wir nach jeder Iteration die Werte in eine .csv Datei ab. Es sind etwa $3000 - 4000$ Iterationen nötig bis sich die Werte nicht mehr verändern. Alles ohne Problem möglich.
+			Wir wollen eine $40 \times 40$ Fläche berechnen. Um die Konvergenz beobachten zu können, speichern wir nach jeder Iteration die Werte in eine .csv Datei ab. Es sind etwa 3000 bis 4000 Iterationen nötig bis sich die Werte nicht mehr verändern. Alles ohne Problem möglich.
 			
-			Wir wollen mehr, eine Fläche mit $500 \times 500$ Punkten. um hier eine Konvergenz zu beobachten sind, wie wir später herausgefunden haben, etwa $160\,000 - 180\,000$ Iterationen nötig. Das Ganze ist natürlich stark vom Ausgangsbild abhängig.
+			Wir wollen mehr, eine Fläche mit $500 \times 500$ Punkten. Um hier eine Konvergenz zu beobachten sind, wie wir später herausgefunden haben, etwa 160\,000 bis 180\,000 Iterationen nötig. Das Ganze ist natürlich stark vom Ausgangsbild abhängig.
 
 			Eine .csv Datei ist dann etwa 1.8\,MB gross, d.h. wir wollen ca. 300\,GB abspeichern. Dies ist möglich sofern genügen Platz vorhanden ist. Das eigentliche  Problem ist aber, dass das Programm nur noch mit Daten speichern beschäftigt ist und kaum noch Zeit zum Rechnen hat.	
 		\end{shadedSmaller}
