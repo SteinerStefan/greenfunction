@@ -1,12 +1,314 @@
+%------------------- C-Code ------------------- %
+\definecolor{colorkeywordstyle}{RGB}{127,0,127}
+\definecolor{colorcommentstyle}{RGB}{0,116,0}
+\definecolor{colorstringstyle}{RGB}{196,26,22}
+\definecolor{colorbackground}{RGB}{240,240,240}
+\definecolor{royalblue}{rgb}{0.15,0.25,0.55}
+\definecolor{black}{rgb}{0,0,0}
+
+\lstnewenvironment{code}[1][]
+  {\lstset{
+  	backgroundcolor =		\color{colorbackground},
+    language =				C++,			
+    basicstyle =    		\ttfamily,
+    breaklines = 			true,
+    frame = 				none,
+    columns =				flexible,
+    keepspaces = 			true,
+    keywordstyle=			\color{colorkeywordstyle},
+    identifierstyle	=\color{royalblue},
+    showstringspaces =		false,
+    extendedchars =			true,   
+    commentstyle = 			\color{colorcommentstyle},,
+    numbers = 				left,
+    numbersep = 			2pt,
+    numberstyle =			\tiny,
+    rulecolor=\color{black}, 
+    stepnumber =			1,
+    tabsize = 				4,
+  }}{\vspace{0em}}
+\lstset{
+  	backgroundcolor =		\color{colorbackground},
+    language =				C++,			
+    basicstyle =    		\ttfamily,
+    breaklines = 			true,
+    frame = 				none,
+    columns =				flexible,
+    keepspaces = 			true,
+    keywordstyle=			\color{colorkeywordstyle},
+    identifierstyle	=\color{royalblue},
+    showstringspaces =		false,
+    extendedchars =			true,   
+    commentstyle = 			\color{colorcommentstyle},,
+    numbers = 				left,
+    numbersep = 			2pt,
+    numberstyle =			\tiny,
+    rulecolor=\color{black}, 
+    stepnumber =			1,
+    tabsize = 				4,
+}
+%---------------------------------------------
+\newcommand{\dunderline}[1]{\underline{\underline{#1}}}
+
+%------------------- Graue Beispielboxen ------------------- %
+\definecolor{MyBoxColor}{rgb}{0.9,0.9,0.9}
+\newenvironment{shadedSmaller}{
+  \def\FrameCommand{\fboxsep=\FrameSep \colorbox{MyBoxColor}}
+  \MakeFramed {\advance\hsize-2\width\FrameRestore}}
+{\endMakeFramed}
+%----------------------------------------------------------- %
+
+\section{Aufgabenstellung}
+
+	Um ein Problem der Mathematik besser zu verstehen, ist es oft sehr hilfreich, wenn es verständlich beschrieben ist. Eine Visualisierung in Form eines Bildes oder kurzen Films ist dabei eine Möglichkeit dies zu bewerkstelligen.
+	
+	Ziel dieses Projektes war, die Greensche Funktion in zwei Dimensionen zu visualisieren. Die Lösung für eine Dimension wurde bereits in einem kurzen Film veranschaulicht \footnote{\url{https://www.youtube.com/watch?v=Wpi7Gf7V2HY}}. Es soll dabei zuerst eine partielle Differentialgleichung gelöst und danach visualisiert werden. Die Greensche Funktion ermöglicht die Berechnung eines Problems durch Superposition. Darum sollten auch verschiedene Anfangswerte untersucht werden und wie diese sich auf die Lösungen auswirken. 
+	
+	Als Differentialgleichung ist das Potentialproblem vorgegeben. Gegeben ist eine leitende Platte, die am Rande geerdet sei. Wenn nun ein Potential an einem oder mehreren Punkten auf dieser Platte anliegt, ist es von Interesse zu wissen, welches Potential man nun an einem beliebigen Punkt auf der Platte misst. 
+
 \section{George Green}
-Der Namensgeber für die Greensche Funktion ist George Green. Er war ein britischer Physiker und Mathematiker. Geboren wurde er 1793 in der Nähe von Nottingham. Sein Vater betrieb eine Mühle und George Green arbeitete ebenfalls als Müller. Nach dem Tod seines Vaters führte er den Mühlenbetrieb fort. Bemerkenswert ist, dass Green nur etwa zwei Jahre in die Schule ging. Mathematische und Physikalische Grundlagen brachte er sich selber bei. Der Ort an dem er lernte war seine Mühle. Da nie ein Portrait von ihm angefertigt wurde, gibt es kein Bild von ihm. Darum wird anstatt seinem Konterfei jeweils eine Windmühle verwendet um ihn darzustellen. Die Windmühle gibt es übrigens immer noch. Green veröffentliche mit etwa dreissig Jahren seine erste Arbeit. Diese wurde kaum beachtet, ausser von einem adligen Mathematik namens Sir Edward Bromhead. Er ermutigte Green, im Alter von vierzig Jahren in Cambridge zu studieren. Interessant zu wissen ist dazu, dass dort zu dieser Zeit die Theorien von Laplace und Fourier noch nicht gelehrt wurden. Green hatte sich jedoch durch diese Theorie gelesen und sogar noch einige Erweiterungen hinzugefügt. Vier Jahre nachdem er graduierte und kurz vor seinem internationalen Durchbruch stand, starb er 1841 jedoch an einer schweren Grippe. Dadurch geriet seine Arbeit für einige Zeit in Vergessenheit.
 
-George Green ist besonders bekannt für das Greensche Theorem und die Greensche Funktion. Er beschäftigte sich mit der Lösung von partiellen Differentialgleichungen und stellte damit unter anderem mathematische Hilfsmittel bereit, die sogar in der Quantenfeldtheorie im 20. Jahrhundert von Bedeutung waren.\cite{wiki:green}
+	Der Namensgeber für die Greensche Funktion ist George Green. Er war ein britischer Physiker und Mathematiker. Geboren wurde er 1793 in der Nähe von Nottingham. Sein Vater betrieb eine Mühle und George Green arbeitete ebenfalls als Müller. Nach dem Tod seines Vaters führte er den Mühlenbetrieb fort. Bemerkenswert ist, dass Green nur etwa zwei Jahre in die Schule ging. Mathematische und Physikalische Grundlagen brachte er sich selber bei. Der Ort an dem er lernte war seine Mühle. Da nie ein Portrait von ihm angefertigt wurde, gibt es kein Bild von ihm. Darum wird anstatt seinem Konterfei jeweils eine Windmühle verwendet um ihn darzustellen. Die Windmühle gibt es übrigens immer noch. Green veröffentliche mit etwa dreissig Jahren seine erste Arbeit. Diese wurde kaum beachtet, ausser von einem adligen Mathematik namens Sir Edward Bromhead. Er ermutigte Green, im Alter von vierzig Jahren in Cambridge zu studieren. Interessant zu wissen ist dazu, dass dort zu dieser Zeit die Theorien von Laplace und Fourier noch nicht gelehrt wurden. Green hatte sich jedoch durch diese Theorie gelesen und sogar noch einige Erweiterungen hinzugefügt. Vier Jahre nachdem er graduierte und kurz vor seinem internationalen Durchbruch stand, starb er 1841 jedoch an einer schweren Grippe. Dadurch geriet seine Arbeit für einige Zeit in Vergessenheit.
+	
+	George Green ist besonders bekannt für das Greensche Theorem und die Greensche Funktion. Er beschäftigte sich mit der Lösung von partiellen Differentialgleichungen und stellte damit unter anderem mathematische Hilfsmittel bereit, die sogar in der Quantenfeldtheorie im 20. Jahrhundert von Bedeutung waren.\cite{wiki:green}
+	
+	Neben vielen anderen Persönlichkeiten wie Maxwell, Dirac oder Newton ist er in der Westminster Abbey in London mit einer Gedenktafel verewigt\cite{wiki:westminster}. Der Grund, warum George Green nicht so populär ist wie Gauss oder Maxwell, liegt wahrscheinlich darin, dass von seiner Zeit, als er in seiner Mühle gearbeitet hat, wenig  bekannt ist. Auch war er nur für sehr kurze Zeit in Cambridge tätig. 
 
-Neben vielen anderen Persönlichkeiten wie Maxwell, Dirac oder Newton ist er in der Westminster Abbey in London mit einer Gedenktafel verewigt\cite{wiki:westminster}. Der Grund, warum George Green nicht so populär ist wie Gauss oder Maxwell, liegt wahrscheinlich darin, dass von seiner Zeit, als er in seiner Mühle gearbeitet hat, wenig  bekannt ist. Auch war er nur für sehr kurze Zeit in Cambridge tätig. Trotzdem war es an dieser Stelle das Ziel, einen so einzigartigen Wissenschaftler, mehr als nur kurz zu erwähnen.
-
-	\begin{figure}[htb]                     \centering 
+	\begin{figure}                    
+	\centering 
 	\includegraphics[width=8cm]{images/greens_windmill} 
 	\caption{Windmühle, in der Green für lange Zeit gearbeitet hat} 
 	\label{fig:abb1} 
 	\end{figure} 
+	
+\section{Algorithmus}
+	Um eine Visualisierung überhaupt durchführen zu können, braucht es in unserem Fall Daten, mit denen wir arbeiten können. Diese liefert uns ein Programm, bei welchem wir Daten einspeisen und im Gegenzug bearbeitet erhalten. 
+	
+	Das Problem, welches wir hier lösen, wurde ebenfalls von Philip Solenthaler und Reto Christen bearbeitet. Sie haben untersucht wie ein Programm geschrieben werden kann, welches dieses Problem möglichst effizient löst.
+	\subsection{Mathematischer Ansatz zur Lösung}
+
+	Das Potentialproblem auf der leitenden Platte, welches wir lösen möchten, hat nun folgende partielle Differentialgleichung. 
+	\begin{equation}\label{eq:gleichung}
+		\dfrac{\partial^2 u}{\partial x^2}+\dfrac{\partial^2 u}{\partial y^2} = f(x,y).
+	\end{equation}
+	Wobei die Rand-, und Anfangsbedingungen auf der leitenden Platte alle null sind. 
+	
+	Die quadratische Platte mit der Länge $n\times n$ wird dabei mit den Werten $u_{ij}$ diskretisiert, wobei $0 < i,j<n$. Wir bekommen eine endliche Anzahl an Werte $u$.
+%	 Dabei wird für jeden Wert $u$ diese Gleichung gelöst. 
+	Der Ansatz für eine Lösung dieses Problems bietet die lineare Algebra, welcher bereits im Theorieteil des Skriptes ausführlich hergeleitet wird. Das bedeutet, wir müssen ein Problem folgender Art lösen.
+	\begin{equation}
+		Au = f
+	\end{equation}
+	Es sei dabei $A$ die Koeffizientenmatrix, $f$ der Störvektor und $u$ der Lösungsvektor. 
+	
+	Die leitende Platte wird als eine Fläche visualisiert. Um diese als Vektor $u$ zu schreiben ist dabei festgelegt worden, dass die Spalten dieser diskretisierten Fläche untereinander geschrieben werden. Dies ergibt Vektoren der länge $n^2$.
+	
+	Aus diesem Zusammenhang heraus ergibt sich dabei die Koeffizientenmatrix $A$. 
+\[
+	A=\left(
+	\begin{array}{ccccc|ccccc|c|ccccc}
+	    -4&     1&     0&\cdots&     0 &     1&     0&     0&\cdots&     0 &\cdots &      &      &      &      &      \\
+	     1&    -4&     1&\cdots&     0 &     0&     1&     0&\cdots&     0 &\cdots &      &      &      &      &      \\
+	     0&     1&    -4&\cdots&     0 &     0&     0&     1&\cdots&     0 &\cdots &      &      &     0&      &      \\
+	\vdots&\vdots&\vdots&\ddots&\vdots &\vdots&\vdots&\vdots&\ddots&\vdots &       &      &      &      &      &      \\
+	     0&     0&     0&\cdots&    -4 &     0&     0&     0&\dots &     1 &\cdots &      &      &      &      &      \\
+	\hline
+	     1&     0&     0&\cdots&     0 &    -4&     1&     0&\dots &     0 &\cdots &      &      &      &      &      \\
+	     0&     1&     0&\cdots&     0 &     1&    -4&     1&\dots &     0 &\cdots &      &      &      &      &      \\
+	     0&     0&     1&\cdots&     0 &     0&     1&    -4&\dots &     0 &\cdots &      &      &     0&      &      \\
+	\vdots&\vdots&\vdots&\ddots&\vdots &\vdots&\vdots&\vdots&\ddots&\vdots &       &      &      &      &      &      \\
+	     0&     0&     0&\cdots&     1 &     0&     0&     0&\cdots&    -4 &\cdots &      &      &      &      &      \\
+	\hline
+	\vdots&\vdots&\vdots&      &\vdots &\vdots&\vdots&\vdots&      &\vdots &\ddots &\vdots&\vdots&\vdots&      &\vdots\\
+	\hline
+	      &      &      &      &       &      &      &      &      &       &\cdots &    -4&     1&     0&\cdots&     0\\
+	      &      &      &      &       &      &      &      &      &       &\cdots &     1&    -4&     1&\cdots&     0\\
+	      &      &     0&      &       &      &      &     0&      &       &\cdots &     0&     1&    -4&\cdots&     0\\
+	      &      &      &      &       &      &      &      &      &       &       &\vdots&\vdots&\vdots&\ddots&\vdots\\
+	      &      &      &      &       &      &      &      &      &       &\cdots &     0&     0&     0&\cdots&    -4\\
+	\end{array}
+	\right) 
+	\]
+
+\subsection{Technische Umsetzung}
+
+	Die Matrix $A$ enthält die Koeffizienten für die partielle Differentialgleichung der zweiten Ordnung. Sie hat die Grösse $n^2 \times n^2$. Diese Matrix im Arbeitsspeicher abzuspeichern wäre für mittelgrosse Matrizen schon nicht mehr möglich.\cite{mueller:hpcseminar}
+	
+	Der benötigte Speicher für eine Platte mit der Grösse $500 \times 500$ und \verb|float| Werten (4 Byte) wäre
+	
+	\begin{equation}
+		500^2 \times 500^2 \cdot 4\;\mathrm{Byte} = 232.8\;\mathrm{GByte}
+	\end{equation}
+	
+	Mit $n = 1000$ sogar 3.64\;TByte, also definitiv zu viel. Dies ist aber auch gar nicht nötig. Es müssen jeweils nur die Nachbarelemente von $u_{ij}$ addiert und durch einen konstanten Faktor geteilt werden, die Randelemente sind dabei Null zu setzen.
+
+	\begin{eqnarray}
+%		f_{ij} = u_{i-i,j}+u_{i+1,j}+u_{i,j+1}+u_{i,j-1}-4u_{ij}\\
+		u_{ij} = \dfrac{u_{i-i,j}+u_{i+1,j}+u_{i,j+1}+u_{i,j-1}-f_{ij}}{4} \label{eq:gauss-seidel}
+	\end{eqnarray}
+	
+	Da die diskretisierte partielle Ableitung jeweils nur die Elemente ober/unterhalb und links/recht des aktuellen Elementes in die Rechnung mit einbezieht (\ref{eq:gauss-seidel}), müssen mindestens $n$ Iterationen durchgeführt werden, damit sich das Potential über die ganze Ebene verteilt.
+	
+	\subsubsection{Parallelisierung}
+	
+	Um das Gleichungssystem (\ref{eq:gleichung}) zu lösen, haben wir den Gauss-Seidel Algorithmus benutzt. Bei diesem Algorithmus ist die aktuelle Zeile von der vorherigen abhängig. Bei der Parallelisierung wird das Gleichungssystem an verschiedenen Stellen zu lösen begonnen. Das ist zwar nicht so effizient, wie ein "'normaler"' Gauss-Seidel, wird aber durch die Parallelisierung schneller.
+		
+		Die Abweichung ist bei den ersten Schritten am grössten, und wird bei jeder Iteration kleiner. Als wie die ersten Berechnungen durch geführt hatten, fiel uns auf, dass die einzelnen Threads am Anfang gut als Linien von Spitzen sichtbar sind (\fref{fig:201_1}).
+		
+		\begin{figure}
+			\centering
+			\includegraphics[width = 15cm]{./images/step001}
+			\caption{Berechnung von einer $201 \times 201$ Fläche mit 32 Threads nach dem ersten Iterationsschritt}
+			\label{fig:201_1}
+		\end{figure}
+		
+		
+		Wir haben uns für Open-MP entschieden, da es für uns die einfachste Methode war, die Berechnung zu parallelisieren. Wie bei der Arbeit von Christen und Solenthaler erklärt, wäre Open-MPI die effizienteste Weise, um solch ein Problem zu lösen. Da hier nur die Resultate des Algorithmus von Interesse waren und wir relativ kleine Probleme gelöst haben, hat es sich nicht gelohnt den Mehraufwand für Open-MPI zu betreiben. Die Rechenzeit war absolut im Rahmen.
+		
+		Wie schon beim Kugelsternhaufen erwähnt, ist nun diese Open-MP Parallelisierung einfach zu realisieren, wie folgendes Beispiel zeigt. 
+		
+\begin{code}
+// Parallelisierung einer for-Schleife
+	int numthreads = 32;
+	#pragma omp parallel for num_threads(numthreads)
+		for (i = 0; i < dim; i++)
+		{ ...
+\end{code}
+
+	\subsubsection{Dateiformate}
+	
+	Um mit der Datenflut umgehen zu können, musste ebenfalls eine Lösung entwickelt werden. Als Eingabedatei wurde ein Bild im FITS Format verwendet. Da es jedoch einfacher schien wurde während des Programmes mit .csv Files gearbeitet. Dabei war der technische Aufwand gering und die Resultate konnten schnell kontrolliert werden. Aus diesen .csv Dateien kann mit GNU-Plot ein Bild erstellt werden. Optional dienen diese als Vorlage für einen kurzen Film. 
+
+\section{Visualisierung}
+	
+	\subsection{Prinzip}
+			
+		Ziel der Visualisierung ist, die einzelnen Schritte einer Berechnung mit der Greenschen Funktion zu zeigen. Bei jedem Schritt kommen zusätzliche Werte zum vorherigen Schritt hinzu. Die Bilder aus \fref{fig:dreiSchritte} stellen drei solche Schritte dar, wie wir sie in unserer Arbeit definiert haben.
+		
+		Würden wir jeweils die Lösungen für alle Werte $u_{ij}$ einzeln berechnen und sie dann addieren, müssten wir diese Schritte schlussendlich noch Visuell darstellen. Der Aufwand hierfür ist aber beträchtlich.
+		Da die Darstellung im Vordergrund steht, ist das Verfahren zur Berechnung irrelevant für das Endergebnis. Um die Rechnung zu beschleunigen, haben wir uns für einen anderen Algorithmus entschieden, welcher uns erlaubt so viele Werte $u_{ij}$ wie nötig miteinander zu lösen.
+		
+		Wir werden dementsprechend immer das gleiche Problem lösen mit jeweils zusätzlichen Werten $u$. Jeder dieser Schritte hat ein Bild mit den vorherigen plus den neuen Werten zu folge. Zusammengestellt ergeben diese Bilder eine anschauliche Visualisierung der Greenschen Funktion.
+	
+	
+	\subsection{Darstellungsmöglichkeiten}
+	
+		Welche Werte wir jeweils in einem Schritt dazu nehmen ist noch offen. Man könnte beispielsweise die Fläche von oben links bis unten rechts durchgehen und immer ein oder mehrere Punkte dazu nehmen. Es ist auch vorstellbar diese Punkte zufällig auszuwählen, bis alle Punkte berechnet wurden. Der Nachteil dieser Verfahren ist, dass sie nicht viel weniger aufwändig sind, als das Verfahren, welches alle Punkte einzeln berechnet. Wenn beispielsweise eine Fläche bzw. Bild mit $500 \times 500$ Werten berechnet werden soll, muss das Problem 250\,000 mal vollständig gelöst werden. Es wären auch 250\,000 Bilder vorhanden, eine Datenflut, die unser Auge wohl kaum bewältigen kann. Es ist fraglich, wie sinnvoll eine solche Visualisierung ist.
+		
+		Um das zu verhindern, haben wir uns entschieden in der Mitte einer solchen Fläche zu beginnen und dann Schrittweise, Ring für Ring, nach aussen zugehen.
+
+	\begin{figure}
+			\centering
+		\begin{tabular}{ccc}
+			\includegraphics[width=5.3cm]{./images/resultate/grfl/step0057.png}
+			& \includegraphics[width=5.3cm]{./images/resultate/grfl/step0111.png}
+			& \includegraphics[width=5.3cm]{./images/resultate/grfl/step0144.png}
+		\end{tabular}		
+			\caption{Die Schritte 57, 111 und 144 auf einer Fläche, die durch $500 \times 500$ Werte dargestellt wird.}
+			\label{fig:dreiSchritte}
+	\end{figure}
+	
+		In jedem dieser drei Schritte werden nur die roten Punkte in die Berechnung berücksichtigt, die anderen werden gleich Null gesetzt. Jeder Schritt wir vollständig gelösst, bis der maximale Fehler eine Grenze unterschreitet.
+	
+	\subsection{Technische Umsetzung}
+	
+		Vor jeder dieser Berechnungen wird ein Vektor $f$, der unsere Fläche repräsentiert, so manipuliert, dass der helle äussere Bereich gleich Null gesetzt wird. Danach wird die Berechnung, die in jedem Schritt identisch ist, durchgeführt.
+		
+		Wir speichern den berechneten Vektor $u$ als Matrix in einem .csv File mit einer Genauigkeit von vier Nachkommastellen ab, was für eine Visualisierung genügt. Anfangs benutzten wir MATLAB um aus dem .csv-File eine anständige Visualisierung zu erhalten. Der Aufwand war gering und die Resultate waren schnell kontrollierbar.
+		
+		\lstinputlisting{./csvToMatrixAndPlot.m}
+		
+		Um das zu automatisieren benutzen wir später Gnuplot, welches sich mit C-Code ohne Probleme ansprechen lässt und uns die Bilder automatisch mit dem vorgegebenen Einstellungen erstellt.
+		
+		Gnuplot ist ein Kommandozeilen basiertes OpenSource Tool, das aber auch mit GUI erhältlich ist. Über eine Pipe ist es möglich alle Einstellungen vorzunehmen. Dadurch kann aus einer .csv Datei ein Bild im .png Format generiert werden.
+		
+		\lstinputlisting{./gnuplot.c}
+	
+	\subsection{Generieren der Bilder}
+	
+		Die Bilder werden nachdem alle Einzelschritte berechnet wurden, aus den Dateien wiederum parallelisiert in einer \verb|for|-Schleife zu .png Bilddateien verarbeitet. Da der letzte Schritt das Maximum bzw. Minimum aller Schritte enthält, sofern wir nur Potentiale mit gleichen Vorzeichen haben, wird die Skalierung der $z$-Achse direkt aus diesen Daten berechnet. Dies garantiert und eine optimale Darstellung. 
+		
+		Wir haben jeweils zwei verschiedene Ansichten erstellt: Eine normal Ansicht, d.h ein 3D-Plot wie er z.B. in \fref{fig:201_1} zusehen ist und eine Ansicht von oben mit Höhenlinien. Aus den Bilddateien wird am Schluss optional noch ein Video erstellt.
+		
+\section{Probleme}
+
+	\subsection{Konvergenz}
+	
+		Wir haben anfangs den HSR-Schriftzug als FITS-File in eine Matrix 
+		eingelesen und diesen als Vektor $f$ abgespeichert. Der maximale Wert des Lösungsvektors $u$ betrug anfangs nur 255, stieg nach einigen hundert Iterationen auf über 3000 an und die Funktion nahm die Form eines Haufens an. Wir hatten mit einem anderem Resultat gerechnet und überprüften unseren Algorithmus. Wir entdeckten keinen Fehler in unserem Algorithmus und konnten die Werte mit MATLAB verifizieren. Die nächste Frage war, ob der Gauss-Seidel Algorithmus konvergiert. Wir berechneten den Spektralradius der Matrix $A$ gemäss Definition\;5.1 aus dem Skript HPC\cite{mueller:hpcseminar}:
+	
+		\begin{eqnarray}
+			A = M+N\\
+			\varrho(M^{-1}N)<1
+		\end{eqnarray}
+		
+		Die Grösse der Matrix $A$ nimmt mit $n^4$ zu, weshalb die Berechnung der Spektralradien mit MATLAB sehr schnell rechenaufwändig wird. Darum haben wir nur Spektralradien mit kleinem $n$ berechnet.
+		
+		\begin{table}
+			\begin{tabular}{cc}
+				n & Specktralradius $\varrho$\\\hline
+				5 & 0.7500\\
+				10 & 0.92063\\
+				15 & 0.96194\\
+				20 & 0.97779\\
+				25 & 0.98547\\
+				40 & 0.99414
+			\end{tabular}
+			\centering
+			\caption{Spaktralradien der Matrix $A$ für eine Matrix $f$ mit der Grösse $n\times n$}
+		\end{table}
+	
+		Einerseits sind alle Spaktralradien kleiner Eins, was gut ist, andererseits sind sie sehr nahe bei Eins, was erklärt wieso unser Algorithmus so langsam konvergiert.
+		
+		Wir hatten später Erfolge, wenn wir die Anfangswerte des Vektors $f$ klein wählten $(f_{ij}<1)$. So waren die Fehler von Anfang an kleiner und wir bekamen brauchbare Werte.
+	
+	\subsection{Datenflut}
+	
+		Bei Platten mit feiner Diskreditierung mussten wir darauf achten, dass wir nicht zu viele Daten abspeichern. Wir mussten das Programm so umschreiben, dass wir einstellen konnten wie viele Bilder wir schlussendlich wollten. Anhand von diesem Einstellungen wurde nur die benötigten .csv und .png Dateien abgespeichert. Das Programm wurde dadurch automatisch auch gleich viel schneller. 
+		
+		\begin{shadedSmaller}
+			Als Beispiel:
+			
+			Wir wollen eine Platte mit  $40 \times 40$ Werten berechnen. Um die Konvergenz beobachten zu können, speichern wir nach jeder Iteration die Werte in eine .csv Datei ab. Es sind etwa 3000 bis 4000 Iterationen nötig bis sich die Werte nicht mehr verändern. Das ist alles ohne Problem möglich.
+			
+			Wir wollen mehr, eine Platte mit $500 \times 500$ Werten. Um hier eine Konvergenz zu beobachten, sind etwa 160\,000 bis 180\,000 Iterationen nötig, wie wir später herausgefunden haben. Das Ganze ist natürlich stark vom Ausgangsbild abhängig.
+
+			Eine .csv Datei ist dann etwa 1.8\,MB gross, d.h. wir wollen ca. 300\,GB abspeichern. Dies ist möglich sofern genügen Platz vorhanden ist. Das eigentliche  Problem ist aber, dass das Programm nur noch mit Daten speichern beschäftigt ist und kaum noch Zeit zum Rechnen hat.	
+		\end{shadedSmaller}
+	
+	\subsection{geeigneter Vektor $f$ finden}\label{sec:geeignetesF}
+	
+	
+		Ein ganz anderes Problem war, ein geeignetes Bild für die Platte zu finden. Es sollte die Überlagerung der Werte gut zeigen. Wir versuchten verschiedene Muster, von einem Schriftzug, einzelne Buchstaben bis zu einzelnen Punkten. Bewährt hat sich eine Spirale. Da wir von innen nach aussen gehen, kommen immer wieder neue Werte an verschiedenen Seiten hinzu. Da schlussendlich nur eine geringe Anzahl Punkte vorhanden sind, wirkt die Visualisierung nicht überladen und ist übersichtlich.
+		
+\section{Resultate}
+
+	Wir haben mehrere Platten mit unterschiedlichen Potentialverteilungen und mit unterschiedlicher Anzahl Diskretisierungspunkten berechnet. Je nach Ausgangsbild, welches unsere Potentialverteilung darstellt, ist die Superposition mehr oder weniger gut erkennbar. Wie in \fref{sec:geeignetesF} erwähnt, hat sich eine Spirale von Punkten bewährt, die wir hier anhand vier verschiedenen Schritten zeigen wollen. Das erste Bild ist jeweils die Fläche für den jeweiligen Schritt. Alle Punkte haben das selbe Potential. Pro Bild führten wir 180\,000 Iterationen durch.
+
+	\newlength\breite
+	\setlength\breite{8cm}
+	\begin{figure}
+			\centering
+		\begin{tabular}{cc}
+			\includegraphics[width=\breite]{./images/resultate/grfl/step0057.png}
+			& \includegraphics[width=\breite]{./images/resultate/grfl/step0111.png}\vspace{1cm}\\
+			\includegraphics[width=\breite]{./images/resultate/cp/step0057.png}
+			& \includegraphics[width=\breite]{./images/resultate/cp/step0111.png}\vspace{1cm}\\
+			\includegraphics[width=\breite]{./images/resultate/np/step0057.png}
+			& \includegraphics[width=\breite]{./images/resultate/np/step0111.png}
+		\end{tabular}		
+			\caption{Visualisierung von Green's Function: Schritte 75 und 111 }
+	\end{figure}
+	
+	\begin{figure}
+			\centering
+		\begin{tabular}{cc}
+			\includegraphics[width=\breite]{./images/resultate/grfl/step0144.png}
+			& \includegraphics[width=\breite]{./images/resultate/grfl/step0175.png}\vspace{1cm}\\
+			\includegraphics[width=\breite]{./images/resultate/cp/step0144.png}
+			& \includegraphics[width=\breite]{./images/resultate/cp/step0175.png}\vspace{1cm}\\
+			\includegraphics[width=\breite]{./images/resultate/np/step0144.png}
+			& \includegraphics[width=\breite]{./images/resultate/np/step0175.png}
+		\end{tabular}		
+			\caption{Visualisierung von Green's Function: Schritte 144 und 175 }
+	\end{figure}
